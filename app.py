@@ -4,7 +4,16 @@ import pandas as pd
 from pyzbar.pyzbar import decode
 import numpy as np
 from tensorflow.keras.models import load_model
+from tensorflow.keras.layers import DepthwiseConv2D
+from tensorflow.keras.utils import custom_object_scope
 from PIL import Image, ImageOps
+
+# Parche para modelos de Google Teachable Machine en TensorFlow moderno
+class CustomDepthwiseConv2D(DepthwiseConv2D):
+    def __init__(self, **kwargs):
+        if 'groups' in kwargs:
+            del kwargs['groups']
+        super().__init__(**kwargs)
 
 # Configuración del Dashboard
 st.set_page_config(page_title="AeroStock - IA Avanzada", layout="wide")
@@ -14,7 +23,8 @@ st.markdown("🚨 **Doble Verificación: Lector QR + Red Neuronal (TensorFlow)**
 # Cargar Modelo de IA (Se guarda en caché para no volver a cargar en cada foto)
 @st.cache_resource
 def load_tm_model():
-    model = load_model("keras_model.h5", compile=False)
+    with custom_object_scope({'DepthwiseConv2D': CustomDepthwiseConv2D}):
+        model = load_model("keras_model.h5", compile=False)
     with open("labels.txt", "r", encoding="utf-8") as f:
         # Quitar los números del inicio de las etiquetas (ej. "0 CAJA GALAK" -> "CAJA GALAK")
         class_names = [line.strip().split(" ", 1)[1] if " " in line.strip() else line.strip() for line in f.readlines()]
