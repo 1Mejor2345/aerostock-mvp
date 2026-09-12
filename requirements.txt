@@ -4,5 +4,6 @@ pyzbar
 pandas
 pillow
 numpy
-tensorflow==2.15.0
+tensorflow-cpu
+tf-keras
 qrcode[pil]
