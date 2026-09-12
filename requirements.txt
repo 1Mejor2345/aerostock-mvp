@@ -4,3 +4,5 @@ pyzbar
 pandas
 pillow
 numpy
+tensorflow-cpu
+qrcode[pil]
