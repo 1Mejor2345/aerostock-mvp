@@ -74,7 +74,17 @@ with col1:
         # 2. PASAR POR EL CEREBRO DE CÓDIGOS (Lector QR)
         bytes_data = img_file_buffer.getvalue()
         cv2_img = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)
-        decoded_objects = decode(cv2_img)
+        
+        # --- MEJORA ÓPTICA PARA QR A DISTANCIA ---
+        # Convertimos a grises y duplicamos el tamaño para que pyzbar vea los píxeles claros
+        gray = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2GRAY)
+        ampliado = cv2.resize(gray, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
+        
+        decoded_objects = decode(ampliado)
+        
+        # Fallback de seguridad: si no encuentra en el ampliado, busca en el original
+        if not decoded_objects:
+            decoded_objects = decode(cv2_img)
         
         qr_leido = "NO DETECTADO"
         if decoded_objects:
