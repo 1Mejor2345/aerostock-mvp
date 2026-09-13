@@ -181,7 +181,7 @@ El problema trasciende la simple <<lectura de inventarios>> y se fragmenta en tr
     \item \textbf{Desalineación ASRS (Error Humano):} Cuando ocurren errores mecánicos en almacenes automatizados, la intervención humana para corregirlos suele generar inconsistencias; el operario registra un producto equivocado en el ERP (ej. Etiqueta marca \textit{Nescafé} pero físicamente es \textit{Maggi}). Un dron tradicional que solo lee etiquetas perpetúa este error.
     \item \textbf{Gestión Ineficiente de Zonas de Picking:} En distribución de alimentos, existen áreas de picking con pallets parciales (mixtos). Escanear la etiqueta máster no revela cuántas unidades físicas restan en el pallet, limitando la visibilidad del \textit{Stock de Seguridad}.
 \end{enumerate}
-
+\newpage
 \section{Viabilidad Técnica}
 Para garantizar que \textbf{AeroStock} sea realista para el contexto operativo de Nestlé, desarrollamos un prototipo funcional (MVP) utilizando herramientas COTS (Commercial Off-The-Shelf) y tecnologías open-source, evitando implementaciones invasivas o sensores costosos (como LiDAR).
 
@@ -225,7 +225,7 @@ Si los datos de la etiqueta no coinciden con el objeto físico observado (El QR 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth, keepaspectratio]{diagrama_2_doble_verificacion.png}
+    \includegraphics[width=0.7\textwidth, keepaspectratio]{diagrama_2_doble_verificacion.png}
     \caption{Árbol de Decisión: Doble Verificación Cognitiva (Resolución de Desalineación ASRS)}
 \end{figure}
 
@@ -243,7 +243,7 @@ AeroStock entrega beneficios directos enfocados en la trazabilidad y la eficienc
     \item \textbf{Conteo Volumétrico en Picking:} Nuestra IA cambia a modo de detección de objetos (\textit{Object Detection}) para contar cajas sueltas en pallets incompletos, informando la cantidad exacta disponible al sistema de \textit{Manufactura Precisa / Stock de Seguridad}.
     \item \textbf{Control PEPS y FEFO:} El sistema cruza la posición física espacial mapeada por el dron con la fecha de expiración del ERP. Si un pallet próximo a vencer quedó atrapado detrás de pallets nuevos, el sistema levanta una alerta de rotación obligatoria.
 \end{itemize}
-
+\newpage
 \section{Sostenibilidad}
 La sostenibilidad de AeroStock radica en la \textbf{reducción masiva del desperdicio de productos (Shrinkage)} y el ahorro de recursos energéticos y mecánicos:
 \begin{itemize}
