@@ -1,0 +1,17 @@
+graph LR
+    classDef scan fill:#00A0DF,stroke:#00529B,stroke-width:2px,color:white;
+    classDef erp fill:#00529B,stroke:#1E293B,stroke-width:2px,color:white;
+    classDef thermal fill:#E32322,stroke:#FFD100,stroke-width:2px,color:white;
+    classDef warning fill:#F59E0B,stroke:#B45309,stroke-width:2px,color:white;
+    classDef ok fill:#10B981,stroke:#065F46,stroke-width:2px,color:white;
+
+    A[Dron realiza patrullaje de 3 minutos]:::scan --> B(Cámara RGB: Mapeo 3D / SLAM)
+    A --> C(Cámara Térmica: Auditoría)
+    
+    B --> D{Cruce de Posición Física\nvs Fechas Vencimiento}:::erp
+    D -->|Lote próximo a vencer bloqueado| E[ALERTA: Priorizar rotación\nEvitar Desperdicio]:::warning
+    D -->|Orden de estiba correcto| F[Flujo PEPS OK]:::ok
+    
+    C --> G{¿Fugas de frío\no exceso escarcha?}:::thermal
+    G -- SI --> H[Alerta de Mantenimiento\no Rescate de Producto]:::warning
+    G -- NO --> I[Integridad en Cadena de Frío]:::ok

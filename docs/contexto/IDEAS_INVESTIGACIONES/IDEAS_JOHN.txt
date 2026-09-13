@@ -1,0 +1,26 @@
+Para que el concepto de AeroStock (dron táctico a demanda con visión computacional) no se sienta como «otro proyecto que vuela un dron para leer códigos», la innovación debe despegarse del hardware y enfocarse en la inteligencia operativa y la resolución de cuellos de botella reales en planta.
+AeroStock ya tiene una base sólida: es táctico (3 minutos vs. volar toda la noche), barato (MVP con hardware comercial de bajo costo) y enfocado en seguridad laboral en frío (-20 °C).
+Para elevar la propuesta y blindarla ante el jurado o los evaluadores frente a competidores:
+1. De "Lectura de QR" a "Visión Térmica + Auditoría de Cadena de Frío"
+El problema común: La mayoría solo propone leer un LPN/código de barras. Si el código está roto o tapado por escarcha en un ambiente de congelación, el dron se vuelve inútil.
+El salto innovador: Añadir una cámara térmica/infrarroja básica al dron. Mientras localiza el pallet, el dron audita si el producto está perdiendo temperatura crítica o si hay microclimas cálidos/fugas en las alturas de los racks. El dron no solo encuentra el pallet extraviado, sino que certifica la integridad del producto antes de moverlo.
+2. Algoritmo de "Ruta Crítica FEFO" integrado en tiempo real
+El problema común: Decir que ayuda al FEFO/PEPS es conceptual.
+El salto innovador: El dron no solo busca un pallet cuando se pierde; el sistema cruza la fecha de expiración registrada en SAP S/4HANA con la posición física tridimensional real que mapea la cámara. Si detecta que un pallet que vence en 5 días quedó atrapado detrás o arriba de uno que vence en 30 días, genera una alerta de bloqueo FEFO automática para que el montacargas lo priorice antes de que quede inaccesible.
+3. Navegación Visual Relativa "Markerless" (Indoor sin GPS)
+El problema común: Los jurados técnicos siempre preguntan: ¿Cómo vuela en interiores sin GPS y con interferencia de racks metálicos? Muchos proyectos caen aquí por depender de sensores LiDAR carísimos o requerir balizas por todo el almacén.
+El salto innovador: Vender como núcleo del software in-house el uso de SLAM visual pasivo (Simultaneous Localization and Mapping) o lectura de marcadores fiduciales de bajo costo (como códigos AprilTag en las vigas del rack). El dron sabe exactamente en qué pasillo, columna y altura se encuentra calculando la distancia relativa al rack, manteniendo el costo de hardware por debajo de los US$2,500.
+4. Detección Inteligente de Anomalías Físicas (Edge AI)
+El problema común: Limitarse a leer texto o códigos QR.
+El salto innovador: Entrenar el modelo de visión por computadora para detectar riesgos de estiba:
+Pallets ladeados o con riesgo de colapso por estiramiento de film defectuoso.
+Cajas aplastadas en niveles superiores.
+Presencia de hielo/escarcha excesiva sobre la carga. Esto transforma a AeroStock de un simple lector de inventarios a un inspector aéreo de seguridad y calidad que cuida la premisa de "Cero Accidentes" antes de que un montacarguista se acerque al rack.
+5. Interfaz de Despacho Táctico para el Operador (UX Operativa)
+El problema común: Dashboards densos en Power BI que nadie revisa en medio del turno.
+El salto innovador: En la tablet del montacarguista, el dron funciona como un "perro guía" digital:
+El operario presiona: «Buscar Pallet X».
+El dron despega autónomamente, localiza la ranura en 3 minutos y le devuelve a la tablet una foto real de la etiqueta y la coordenada exacta en 3D (ej. Pasillo 4, Rack B, Altura 3).
+Si la etiqueta está volteada, la tablet le muestra la foto del pallet sospechoso con la alerta de etiqueta oculta para que el operador solo vaya a girarlo.
+La narrativa ganadora para presentarlo: No vendan "drones para inventario". Vendan AeroStock como un sistema de Visión Táctica de Excepciones para ambientes hostiles: una herramienta que elimina la exposición humana a temperaturas bajo cero, rescata pallets al borde del vencimiento y ejecuta en 3 minutos auditorías físicas que a un montacargas le tomarían horas.
+¿El enfoque de la innovación debe estar más orientado al software de visión por computadora, a la justificación del retorno de inversión (ROI) para la planta, o a la integración con SAP/W

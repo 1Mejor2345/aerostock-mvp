@@ -1,0 +1,28 @@
+graph TD
+    classDef start fill:#00529B,stroke:#1E293B,stroke-width:2px,color:white;
+    classDef process fill:#00A0DF,stroke:#00529B,stroke-width:2px,color:white;
+    classDef decision fill:#FFD100,stroke:#E32322,stroke-width:2px,color:black;
+    classDef error fill:#E32322,stroke:#1E293B,stroke-width:2px,color:white;
+    classDef success fill:#10B981,stroke:#065F46,stroke-width:2px,color:white;
+
+    S([Escaneo de Pallet / Zona Picking]):::start --> P1[Captura Simultánea de Imagen]:::process
+    P1 --> Q1[Proceso A: Decodificación QR]
+    P1 --> Q2[Proceso B: Reconocimiento Visual de Cajas]
+
+    Q1 --> D1{¿QR Ilegible o\ntapado por Film?}:::decision
+    
+    %% Caso: Etiqueta Rota
+    D1 -- SI --> P2[El sistema confía 100% en la IA Visual]:::process
+    Q2 --> P2
+    P2 --> E1[ALERTA TÁCTICA: \nImprimir nueva etiqueta]:::error
+
+    %% Caso: QR detectado
+    D1 -- NO --> D2{¿El lote del QR coincide\ncon la IA visual?}:::decision
+    Q2 --> D2
+    
+    %% Error Humano ASRS
+    D2 -- NO --> E2[ALERTA CRÍTICA: Desalineación ASRS.\nError humano detectado al transcribir]:::error
+    E2 --> E3[Bloquear Pallet]:::error
+    
+    %% Éxito
+    D2 -- SI --> S1[VERIFICACIÓN OK:\nLote Confirmado]:::success

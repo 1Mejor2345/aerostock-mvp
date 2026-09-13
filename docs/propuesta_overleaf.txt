@@ -1,0 +1,263 @@
+%% -------------------------------------------------------
+%% AeroStock — Hackathon InnoLabs Nestlé ESPOL 2026
+%% Propuesta Oficial · Plantilla Overleaf (Versión Español)
+%% -------------------------------------------------------
+%% INSTRUCCIONES:
+%%   1. Crea un proyecto en blanco en Overleaf.
+%%   2. Pega TODO este contenido en el archivo main.tex.
+%%   3. Sube tus imágenes a la carpeta raíz del proyecto y
+%%      reemplaza los nombres (ej. logo_espol.png).
+%%   4. Compila con pdfLaTeX.
+%% -------------------------------------------------------
+
+\documentclass[11pt, a4paper]{article}
+
+% ── Paquetes ─────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{fontawesome5}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usetikzlibrary{calc, positioning, shadows.blur}
+
+% ── Geometría ────────────────────────────────────────────
+\geometry{a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+\setstretch{1.15}
+
+% ── Paleta de Colores (Estilo Nestlé) ────────────────────
+\definecolor{NestleBlue}{HTML}{00529B} % Azul Corporativo
+\definecolor{NestleLightBlue}{HTML}{00A0DF} % Azul Claro
+\definecolor{MaggiRed}{HTML}{E32322} % Rojo Maggi/Nescafé
+\definecolor{MaggiYellow}{HTML}{FFD100} % Amarillo Maggi
+\definecolor{SlateText}{HTML}{1E293B}
+\definecolor{LightBg}{HTML}{F8FAFC}
+\definecolor{MutedText}{HTML}{64748B}
+
+% ── Hyperref ─────────────────────────────────────────────
+\hypersetup{
+  colorlinks  = true,
+  linkcolor   = NestleBlue,
+  urlcolor    = NestleLightBlue,
+  citecolor   = SlateText,
+  pdfauthor   = {José Luis Paladines & John Maximiliano Carreño},
+  pdftitle    = {AeroStock – Hackathon InnoLabs Nestlé 2026},
+  pdfsubject  = {Gestión Inteligente de Inventarios}
+}
+
+% ── Encabezados / Pies de página ─────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{NestleBlue}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\small\textcolor{MutedText}{\textbf{AeroStock:} Auditor Cognitivo de Inventarios}}
+\fancyhead[R]{\small\textcolor{MutedText}{Hackathon InnoLabs Nestlé}}
+\fancyfoot[C]{\small\textcolor{MutedText}{\thepage}}
+
+% ── Formato de Títulos ───────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\color{SlateText}}
+  {\textcolor{NestleBlue}{0\thesection .}}{0.8em}{}
+  [\vspace{-4pt}{\color{NestleBlue}\rule{\linewidth}{1.2pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\color{SlateText}}
+  {\thesubsection}{0.6em}{}
+
+% ── Cajas Personalizadas ────────────────────────────────
+\newtcolorbox{keybox}[1][]{
+  enhanced, breakable,
+  colback   = LightBg,
+  colframe  = NestleBlue,
+  boxrule   = 0pt, 
+  leftrule  = 4pt,
+  arc       = 0pt,
+  left      = 12pt, right = 12pt,
+  top       = 8pt,  bottom = 8pt,
+  fontupper = \small,
+  #1
+}
+
+\newtcolorbox{accentbox}[1][]{
+  enhanced, breakable,
+  colback   = MaggiYellow!10,
+  colframe  = MaggiRed,
+  boxrule   = 0pt, 
+  leftrule  = 4pt,
+  arc       = 0pt,
+  left      = 12pt, right = 12pt,
+  top       = 8pt,  bottom = 8pt,
+  fontupper = \small,
+  #1
+}
+
+% ══════════════════════════════════════════════════════════
+% PORTADA
+% ══════════════════════════════════════════════════════════
+\begin{document}
+\thispagestyle{empty}
+
+\begin{tikzpicture}[remember picture, overlay]
+  % Fondo
+  \fill[LightBg] (current page.south west) rectangle (current page.north east);
+  % Barra Izquierda Azul
+  \fill[NestleBlue] (current page.south west) rectangle ([xshift=10mm]current page.north west);
+  % Barra Inferior Maggi Red
+  \fill[MaggiRed] (current page.south west) rectangle ([yshift=8mm]current page.south east);
+  % Círculos Decorativos
+  \fill[NestleLightBlue, opacity=0.1] ([xshift=12cm, yshift=8cm]current page.south west) circle (6cm);
+  \fill[MaggiYellow, opacity=0.15]   ([xshift=4cm, yshift=14cm]current page.south west) circle (4cm);
+\end{tikzpicture}
+
+% Logos
+\vspace*{-1cm}
+\noindent
+\begin{minipage}{0.5\textwidth}
+  \begin{flushleft}
+    \includegraphics[height=1.8cm]{logo_espol.png}
+  \end{flushleft}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \begin{flushright}
+    \includegraphics[height=1.8cm]{nestle_logo.png}
+  \end{flushright}
+\end{minipage}
+
+\vspace*{6cm}
+\begin{flushright}
+  {\Huge \bfseries \textcolor{NestleBlue}{AeroStock}} \\[0.5cm]
+  {\Large \bfseries \textcolor{SlateText}{Auditor Cognitivo y Táctico de Inventarios}} \\[1cm]
+  
+  \begin{accentbox}
+    \begin{flushright}
+      \textit{<<Automatización Edge AI y Visión Computacional para resolver cuellos de botella en la gestión de inventarios, ambientes hostiles y control PEPS.>>}
+    \end{flushright}
+  \end{accentbox}
+  
+  \vspace{3cm}
+  {\Large \textbf{Equipo Desarrollador}}\\[0.2cm]
+  {\large John Maximiliano Carreño Robalino}\\[0.1cm]
+  {\large José Luis Paladines Sánchez}\\[1cm]
+  
+  {\large \textbf{Reto 02:} Gestión inteligente de inventarios}\\[0.2cm]
+  {\large Septiembre 2026}
+\end{flushright}
+
+\newpage
+% ══════════════════════════════════════════════════════════
+% CUERPO DEL DOCUMENTO 
+% (Estructurado acorde a los 6 Criterios de Evaluación del Hackathon)
+% ══════════════════════════════════════════════════════════
+
+\section{Problemática}
+De acuerdo con nuestras investigaciones y consultas con expertos en sistemas ASRS (Automated Storage and Retrieval Systems) y documentación interna sobre el control de inventarios de Nestlé, hemos identificado que el proceso logístico actual presenta fallas críticas originadas por la baja automatización y la dependencia de la transcripción manual humana.
+
+El problema trasciende la simple <<lectura de inventarios>> y se fragmenta en tres puntos críticos (la ceguera logística):
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth, keepaspectratio]{dron_bodega.jpg}
+    \caption{Concepto: Dron táctico AeroStock operando en ambiente de frío.}
+\end{figure}
+
+\begin{enumerate}
+    \item \textbf{Etiquetas Dañadas:} El uso de film plástico en pallets (común en áreas de frío) degrada o bloquea la lectura de códigos QR tradicionales. Si el lector óptico falla, el pallet se vuelve indetectable.
+    \item \textbf{Desalineación ASRS (Error Humano):} Cuando ocurren errores mecánicos en almacenes automatizados, la intervención humana para corregirlos suele generar inconsistencias; el operario registra un producto equivocado en el ERP (ej. Etiqueta marca \textit{Nescafé} pero físicamente es \textit{Maggi}). Un dron tradicional que solo lee etiquetas perpetúa este error.
+    \item \textbf{Gestión Ineficiente de Zonas de Picking:} En distribución de alimentos, existen áreas de picking con pallets parciales (mixtos). Escanear la etiqueta máster no revela cuántas unidades físicas restan en el pallet, limitando la visibilidad del \textit{Stock de Seguridad}.
+\end{enumerate}
+
+\section{Viabilidad Técnica}
+Para garantizar que \textbf{AeroStock} sea realista para el contexto operativo de Nestlé, desarrollamos un prototipo funcional (MVP) utilizando herramientas COTS (Commercial Off-The-Shelf) y tecnologías open-source, evitando implementaciones invasivas o sensores costosos (como LiDAR).
+
+\begin{keybox}
+\textbf{Arquitectura del MVP Desarrollado:}
+\begin{itemize}
+    \item \textbf{Visión Computacional y Edge AI:} Implementamos un modelo de red neuronal convolucional (CNN) basado en \textit{TensorFlow (Keras)} capaz de ejecutarse en dispositivos ligeros sin consumir un ancho de banda masivo.
+    \item \textbf{Framework Táctico:} Construido sobre \textit{Streamlit} y \textit{OpenCV}, permitiendo el procesamiento simultáneo de decodificación de códigos de barras (pyzbar) e inferencia visual de productos.
+    \item \textbf{Navegación Relativa (SLAMS sin GPS):} Se propone un vuelo autónomo basado en marcadores fiduciales de bajo costo (ej. AprilTags en racks) para navegación en interiores, manteniendo el hardware del dron por debajo de los USD \$1,000.
+\end{itemize}
+\end{keybox}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth, keepaspectratio]{productos_prueba.jpg}
+        \caption{Entrenamiento de IA (Productos Nestlé)}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth, keepaspectratio]{qrs_pueba.jpg}
+        \caption{Códigos QR para Simulación}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth, keepaspectratio]{diagrama_1_arquitectura.png}
+    \caption{Arquitectura del Sistema AeroStock (Edge AI + ERP)}
+\end{figure}
+
+\section{Diferenciación}
+El mercado está saturado de drones de inventario que simplemente escanean códigos. \textbf{AeroStock} se diferencia drásticamente al transformarse en un \textit{Auditor Cognitivo} en lugar de un lector pasivo.
+
+Nuestra mayor innovación radica en la \textbf{Doble Verificación Visual}. Mientras el dron vuela, ejecuta dos procesos simultáneos:
+1. Extrae el ID del Lote leyendo la etiqueta QR/Barras.
+2. Reconoce visualmente el empaque y producto (colores, formas, marca) usando su modelo de IA.
+
+Si los datos de la etiqueta no coinciden con el objeto físico observado (El QR dice "Nescafé" pero la caja es <<Galletas Rica>>), AeroStock emite una alerta crítica de \textbf{Desalineación por Error Humano}, bloqueando el pallet antes de que cause un problema con clientes finales. Esta característica es inédita en soluciones de drones convencionales.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth, keepaspectratio]{diagrama_2_doble_verificacion.png}
+    \caption{Árbol de Decisión: Doble Verificación Cognitiva (Resolución de Desalineación ASRS)}
+\end{figure}
+
+\section{Propuesta de Valor}
+AeroStock entrega beneficios directos enfocados en la trazabilidad y la eficiencia operativa diaria:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth, keepaspectratio]{operario_tablet.jpg}
+    \caption{UI Táctica: Montacarguista recibiendo confirmación de inventario en tiempo real.}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Seguridad Laboral y Excepciones:} Operando como un Dron Táctico a demanda. En lugar de enviar un operario a 15 metros de altura en cámaras de frío (-20 °C) para buscar un pallet extraviado, el operario lanza AeroStock desde su tablet. El dron encuentra la falla en 3 minutos.
+    \item \textbf{Conteo Volumétrico en Picking:} Nuestra IA cambia a modo de detección de objetos (\textit{Object Detection}) para contar cajas sueltas en pallets incompletos, informando la cantidad exacta disponible al sistema de \textit{Manufactura Precisa / Stock de Seguridad}.
+    \item \textbf{Control PEPS y FEFO:} El sistema cruza la posición física espacial mapeada por el dron con la fecha de expiración del ERP. Si un pallet próximo a vencer quedó atrapado detrás de pallets nuevos, el sistema levanta una alerta de rotación obligatoria.
+\end{itemize}
+
+\section{Sostenibilidad}
+La sostenibilidad de AeroStock radica en la \textbf{reducción masiva del desperdicio de productos (Shrinkage)} y el ahorro de recursos energéticos y mecánicos:
+\begin{itemize}
+    \item \textbf{Auditoría de Frío (Innovación Térmica):} Mediante la implementación de cámaras térmicas básicas, AeroStock inspecciona fugas de frío y microclimas cálidos en el techo del almacén durante el inventario, protegiendo la inocuidad de alimentos perecibles y evitando mermas gigantescas.
+    \item \textbf{Eficiencia Energética del Montacargas:} Elimina las horas de conducción a ciegas buscando lotes perdidos, reduciendo la huella de carbono de la flota de montacargas de la planta.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth, keepaspectratio]{diagrama_3_fefo_termico.png}
+    \caption{Flujo Térmico y Rotación FEFO para Prevención de Desperdicios}
+\end{figure}
+
+\section{Escalabilidad}
+El sistema es un puente directo a la filosofía \textbf{Industria 4.0} de Nestlé. Al estar basado en \textit{Computer Vision} (Software) y no en sensores privativos de una marca específica de dron (Hardware), AeroStock puede integrarse como API (Interfaz de Programación de Aplicaciones) a cualquier sistema existente (SAP S/4HANA) u operar utilizando las cámaras de seguridad fijas del almacén. Esta versatilidad permite implementar el sistema tanto en un mega-centro de distribución nacional como en una bodega pequeña de distribuidores locales, masificando su adopción.
+
+\end{document}

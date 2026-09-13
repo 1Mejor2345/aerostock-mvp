@@ -1,0 +1,23 @@
+Hi John,
+ 
+as promised here my thoughts on your questions.
+ 
+From a technical standpoint a warehouse should not be a difficult environment to fly for a drone so LiDARs or advanced external hardware should not be needed (but I am not an expert on this point).
+ 
+I am more concerned about the camera of the drone. 
+ 
+One of the biggest and most common issue we have in our warehouses are related to labels, some of them are partially covered by the film of the pallets, some of them lost the quality of the printing with the time or get partially damaged when the goods are moved.
+ 
+Another common issue in ASRS warehouses are misallignments due to human mistakes when recovering automation errors.
+It can happen that a small error marks a pallet as a good that is not really on the pallet, in this case an automatic reading of the label (e.g. using a drone) is not enough during inventory.
+ 
+Last very important point in my opinion is for warehouses where not just full pallets storage is present.
+For example in food distribution some customers buy goods in quantity minor than the quantity present on a pallet, for this reason some distribution centers have a picking area (manual or semi-automatic) where operators create new pallets before shipping with mixed goods.
+This causes to have different pallets in the picking area that are not “full pallets” and having an automatic inventory simply reading the label is not enough since the count of the goods each is required.
+ 
+I hope these few notes can help you in someway.
+ 
+I really appreciate your project and I would be very interested in reading the outcome once you reach the end, if this would be possible of course.
+ 
+Wish you a great weekend,
+Filippo

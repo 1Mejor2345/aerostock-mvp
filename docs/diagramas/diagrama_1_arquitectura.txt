@@ -1,0 +1,22 @@
+graph TD
+    %% Colores Corporativos (Azul Nestlé y Rojo Maggi)
+    classDef drone fill:#00529B,stroke:#1E293B,stroke-width:2px,color:white;
+    classDef cloud fill:#00A0DF,stroke:#00529B,stroke-width:2px,color:white;
+    classDef erp fill:#1E293B,stroke:#00529B,stroke-width:2px,color:white;
+    classDef alert fill:#E32322,stroke:#FFD100,stroke-width:2px,color:white;
+    classDef success fill:#10B981,stroke:#065F46,stroke-width:2px,color:white;
+
+    A[Dron Táctico AeroStock]:::drone -->|1. Feed de Video RGB/Térmico| B(Procesamiento Edge AI):::cloud
+    
+    subgraph Doble Análisis Simultáneo
+        B --> C{Lector QR / pyzbar}
+        B --> D{Visión TensorFlow / Keras}
+    end
+    
+    C -->|2a. ID de Lote / SAP| E[Motor Cognitivo de Decisión]:::cloud
+    D -->|2b. Empaque / Producto Real| E
+    
+    E -->|3. Validación Cruzada| F[(Nestlé ERP / SAP S/4HANA)]:::erp
+    
+    F -->|Registro Exitoso sin \nTranscripción Manual| G[Inventario Actualizado \nStock de Seguridad OK]:::success
+    E -.->|4. Alerta de Anomalía| H[Tablet del Montacarguista\nAlerta de Desalineación]:::alert
