@@ -10,43 +10,78 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.layers import DepthwiseConv2D
 from tensorflow.keras.utils import custom_object_scope
 from PIL import Image, ImageOps
+import sqlite3
+import datetime
 
 # ==========================================
 # CONFIGURACIÓN DE PÁGINA (UI/UX)
 # ==========================================
 st.set_page_config(page_title="AeroStock OS | Nestlé", page_icon="🚁", layout="wide")
 
-# CSS Personalizado para darle look de "Dashboard Profesional"
 st.markdown("""
 <style>
-    /* Estilos de tarjetas métricas (Power BI feel) */
     div[data-testid="metric-container"] {
-        background-color: #f8fafc;
-        border: 1px solid #e2e8f0;
-        padding: 15px;
-        border-radius: 10px;
-        border-left: 5px solid #00529B; /* Azul Nestlé */
+        background-color: #f8fafc; border: 1px solid #e2e8f0;
+        padding: 15px; border-radius: 10px; border-left: 5px solid #00529B;
         box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
     }
-    /* Títulos principales */
     .main-title { color: #00529B; font-weight: bold; }
-    /* Estilo del botón táctico */
-    .stButton>button {
-        background-color: #E32322; /* Rojo Maggi */
-        color: white;
-        border-radius: 5px;
-        font-weight: bold;
-    }
+    .stButton>button { background-color: #E32322; color: white; border-radius: 5px; font-weight: bold; }
 </style>
 """, unsafe_allow_html=True)
+
+# ==========================================
+# BASE DE DATOS SQLITE (TRAZABILIDAD)
+# ==========================================
+def init_db():
+    conn = sqlite3.connect("aerostock_trazabilidad.db")
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS inventory_metadata (
+            qr_id TEXT PRIMARY KEY,
+            producto TEXT,
+            lote TEXT,
+            fecha_ingreso TEXT,
+            fecha_caducidad TEXT,
+            proveedor TEXT,
+            cantidad_recibida TEXT,
+            condicion_empaque TEXT
+        )
+    ''')
+    
+    # Datos pre-cargados que cumplen estrictamente con los 5 puntos del artículo de Nestlé
+    datos_prueba = [
+        ("NSL-001", "CAJA GALAK", "L-2026-GAL", "2026-09-01", "2027-01-15", "Fábrica Surindu", "500 cajas", "Óptima"),
+        ("NSL-002", "CAJA MAGGI", "L-2026-MAG", "2026-09-05", "2026-11-30", "Fábrica Cayambe", "1200 cajas", "Óptima"),
+        ("NSL-003", "LECHE VAQUITA PEQ", "L-2026-VAQ", "2026-09-10", "2026-08-20", "Lácteos Ecuatorianos", "300 cajas", "Revisar Film"), # Vencido para probar FEFO
+        ("NSL-004", "CAJA GALLETAS RICA", "L-2026-RIC", "2026-09-11", "2027-02-10", "Fábrica Surindu", "800 cajas", "Óptima"),
+        ("NSL-999", "Nescafé Tradición", "L-2026-ERR", "2026-09-12", "2028-05-01", "Fábrica Guayaquil", "200 cajas", "Óptima") # ID trampa para el test de error humano
+    ]
+    
+    cursor.executemany('''
+        INSERT OR IGNORE INTO inventory_metadata (qr_id, producto, lote, fecha_ingreso, fecha_caducidad, proveedor, cantidad_recibida, condicion_empaque)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    ''', datos_prueba)
+    
+    conn.commit()
+    conn.close()
+
+init_db()
+
+def get_metadata(qr_id):
+    conn = sqlite3.connect("aerostock_trazabilidad.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT producto, lote, fecha_ingreso, fecha_caducidad, proveedor, cantidad_recibida, condicion_empaque FROM inventory_metadata WHERE qr_id=?", (qr_id,))
+    row = cursor.fetchone()
+    conn.close()
+    return row
 
 # ==========================================
 # Carga de Modelos y Datos
 # ==========================================
 class CustomDepthwiseConv2D(DepthwiseConv2D):
     def __init__(self, **kwargs):
-        if 'groups' in kwargs:
-            del kwargs['groups']
+        if 'groups' in kwargs: del kwargs['groups']
         super().__init__(**kwargs)
 
 @st.cache_resource
@@ -77,7 +112,7 @@ def classify_image(img_buffer):
     return class_names[index], prediction[0][index]
 
 if "db" not in st.session_state:
-    st.session_state.db = pd.DataFrame(columns=["Timestamp", "Cerebro_QR", "Cerebro_IA_Visual", "Confianza", "Estado", "Decision_Operativa"])
+    st.session_state.db = pd.DataFrame(columns=["Timestamp", "ID_Leido", "IA_Visual", "Lote", "Estado", "Decision_Operativa"])
 
 # ==========================================
 # MENÚ LATERAL (SIDEBAR)
@@ -86,12 +121,7 @@ with st.sidebar:
     st.image("docs/images/nestle_logo.png", use_container_width=True)
     st.markdown("<h2 style='text-align: center; color: #00529B;'>AeroStock OS</h2>", unsafe_allow_html=True)
     st.markdown("---")
-    
-    menu = st.radio(
-        "Navegación Táctica",
-        ["📊 Dashboard Analytics", "🚁 Escáner Táctico (IA)", "ℹ️ Contexto y Equipo"]
-    )
-    
+    menu = st.radio("Navegación Táctica", ["📊 Dashboard Analytics", "🚁 Escáner Táctico (IA)", "ℹ️ Contexto y Equipo"])
     st.markdown("---")
     st.caption("Hackathon InnoLabs Nestlé ESPOL 2026")
     st.caption("Desarrollado por: J. Carreño & J. Paladines")
@@ -101,34 +131,29 @@ with st.sidebar:
 # ==========================================
 if menu == "📊 Dashboard Analytics":
     st.markdown("<h1 class='main-title'>📊 Dashboard de Inteligencia Operativa</h1>", unsafe_allow_html=True)
-    st.markdown("Monitor de KPIs en tiempo real para control de inventarios y toma de decisiones (PEPS/FEFO).")
+    st.markdown("Monitor de KPIs en tiempo real para control de inventarios y trazabilidad alimentaria.")
     
-    # Métricas Superiores
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Pallets Auditados Hoy", "1,245", "+15% vs ayer")
-    c2.metric("Desalineaciones ASRS Evitadas", "12", "-2 casos")
-    c3.metric("Recuperación Etiquetas (IA)", "48", "+5 casos")
-    c4.metric("Eficiencia de Rotación PEPS", "98.5%", "+1.2%")
+    c1.metric("Pallets Auditados", "1,245", "+15% vs ayer")
+    c2.metric("Desalineaciones ASRS", "12", "-2 casos")
+    c3.metric("Alertas de Trazabilidad", "8", "Falta QR")
+    c4.metric("Eficiencia FEFO", "98.5%", "+1.2%")
     
     st.markdown("<br>", unsafe_allow_html=True)
-    
-    # Gráficos simulados
     col1, col2 = st.columns(2)
-    
     with col1:
         st.subheader("Tendencia de Anomalías (Últimos 7 días)")
         chart_data = pd.DataFrame(
             np.random.randint(2, 15, size=(7, 2)),
-            columns=['Desalineación ASRS', 'Etiquetas Dañadas/Frío'],
+            columns=['Desalineación ASRS', 'Pérdida Trazabilidad (Sin QR)'],
             index=['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
         )
         st.line_chart(chart_data)
-        
     with col2:
-        st.subheader("Distribución de Inventario Recuperado por IA")
+        st.subheader("Estado de Auditorías")
         pie_data = pd.DataFrame({
-            'Categoría': ['Maggi', 'Nescafé', 'Galletas', 'Lácteos'],
-            'Recuperados': [45, 20, 15, 20]
+            'Categoría': ['Match Perfecto', 'Desalineación ASRS', 'Sin QR (Alerta)'],
+            'Casos': [85, 5, 10]
         }).set_index('Categoría')
         st.bar_chart(pie_data)
         
@@ -140,11 +165,10 @@ if menu == "📊 Dashboard Analytics":
 # PÁGINA 2: ESCÁNER TÁCTICO (IA)
 # ==========================================
 elif menu == "🚁 Escáner Táctico (IA)":
-    st.markdown("<h1 class='main-title'>🚁 Escáner Táctico y Doble Verificación</h1>", unsafe_allow_html=True)
-    st.markdown("Interfaz del Montacarguista / Operador Edge para patrullaje y auditoría de excepciones.")
+    st.markdown("<h1 class='main-title'>🚁 Escáner Táctico: Trazabilidad y Doble Verificación</h1>", unsafe_allow_html=True)
+    st.markdown("Validación cruzada entre reconocimiento físico (IA) y metadatos de trazabilidad (SQLite).")
     
     col1, col2 = st.columns([1, 1])
-    
     with col1:
         st.info("📡 **Terminal Activa:** Montacargas 04 | **Ubicación:** Pasillo B - Rack 3")
         img_file_buffer = st.camera_input("Capturar pallet objetivo")
@@ -154,7 +178,7 @@ elif menu == "🚁 Escáner Táctico (IA)":
                 # 1. IA VISUAL
                 ia_clase, ia_confianza = classify_image(img_file_buffer)
                 
-                # 2. LECTOR QR (Con mejora óptica)
+                # 2. LECTOR QR
                 bytes_data = img_file_buffer.getvalue()
                 cv2_img = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)
                 gray = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2GRAY)
@@ -167,35 +191,47 @@ elif menu == "🚁 Escáner Táctico (IA)":
                 if decoded_objects:
                     qr_leido = decoded_objects[0].data.decode("utf-8")
 
-                # 3. LÓGICA DE DECISIÓN
+                # 3. LÓGICA DE DECISIÓN Y TRAZABILIDAD (SQLITE)
                 decision = ""
                 estado = ""
                 estado_color = "success"
-
+                lote_detectado = "N/A"
+                
                 if "VACIO" in ia_clase.upper():
                     decision = "PASILLO DESPEJADO. Continuar patrullaje."
                     estado = "Info"
                     estado_color = "info"
-                elif qr_leido != "NO DETECTADO":
-                    if "ERROR" in qr_leido.upper() or qr_leido.upper() != ia_clase.upper()[:len(qr_leido)]:
-                        decision = f"DESALINEACIÓN ASRS: QR indica '{qr_leido}' pero IA detecta '{ia_clase}'. Envío bloqueado por error humano."
-                        estado = "Crítico"
-                        estado_color = "error"
-                    else:
-                        decision = "DOBLE VERIFICACIÓN OK: SAP y físico coinciden."
-                        estado = "Aprobado"
-                        estado_color = "success"
+                elif qr_leido == "NO DETECTADO":
+                    # NUEVA REGLA: Si no hay QR, se pierde la trazabilidad aunque la IA reconozca el producto.
+                    decision = f"PÉRDIDA DE TRAZABILIDAD: IA detectó '{ia_clase}', pero no hay QR legible. Imposible recuperar Lote y Caducidad. Re-etiquetar inmediatamente."
+                    estado = "Alerta Trazabilidad"
+                    estado_color = "error"
                 else:
-                    decision = f"ETIQUETA DAÑADA: Producto '{ia_clase}' identificado por IA. Emitir orden de re-etiquetado."
-                    estado = "Advertencia"
-                    estado_color = "warning"
+                    # Buscar ID en Base de Datos SQLite
+                    metadata = get_metadata(qr_leido)
+                    if metadata:
+                        db_producto, db_lote, db_ingreso, db_caducidad, db_proveedor, db_cantidad, db_condicion = metadata
+                        lote_detectado = db_lote
+                        
+                        # Validar si el producto de la BD coincide con la IA
+                        if ia_clase.upper() in db_producto.upper() or db_producto.upper() in ia_clase.upper():
+                            decision = f"TRAZABILIDAD OK: Coincide físico '{ia_clase}' con BD. (Lote: {db_lote} | Vence: {db_caducidad})"
+                            estado = "Aprobado"
+                            estado_color = "success"
+                        else:
+                            decision = f"DESALINEACIÓN ASRS: QR ID '{qr_leido}' pertenece a '{db_producto}' (Lote {db_lote}), pero IA visualiza '{ia_clase}'. Bloquear Pallet."
+                            estado = "Crítico (ASRS)"
+                            estado_color = "error"
+                    else:
+                        decision = f"ID DESCONOCIDO: El QR '{qr_leido}' no existe en la BD de trazabilidad."
+                        estado = "Advertencia"
+                        estado_color = "warning"
                 
-                import datetime
                 nuevo_registro = pd.DataFrame([{
                     "Timestamp": datetime.datetime.now().strftime("%H:%M:%S"),
-                    "Cerebro_QR": qr_leido,
-                    "Cerebro_IA_Visual": ia_clase,
-                    "Confianza": f"{ia_confianza:.0%}",
+                    "ID_Leido": qr_leido,
+                    "IA_Visual": ia_clase,
+                    "Lote": lote_detectado,
                     "Estado": estado,
                     "Decision_Operativa": decision
                 }])
@@ -203,9 +239,9 @@ elif menu == "🚁 Escáner Táctico (IA)":
 
     with col2:
         if img_file_buffer is not None and ia_lista:
-            st.subheader("Resultados de Auditoría")
-            st.markdown(f"**Lector Óptico (QR):** `{qr_leido}`")
-            st.markdown(f"**Reconocimiento Visual (IA):** `{ia_clase}` (Precisión: {ia_confianza:.0%})")
+            st.subheader("Auditoría de Trazabilidad")
+            st.markdown(f"**ID Extraído (QR):** `{qr_leido}`")
+            st.markdown(f"**Validación Visual (IA):** `{ia_clase}` (Precisión: {ia_confianza:.0%})")
             
             if estado_color == "success": 
                 st.success(f"✅ {decision}")
@@ -216,8 +252,8 @@ elif menu == "🚁 Escáner Táctico (IA)":
             else: 
                 st.info(f"ℹ️ {decision}")
                 
-            st.markdown("### Historial Reciente")
-            st.dataframe(st.session_state.db.head(3), use_container_width=True)
+            st.markdown("### Registro Diario")
+            st.dataframe(st.session_state.db.head(4), use_container_width=True)
         else:
             st.warning("Esperando conexión de video... Encienda la cámara para auditar.")
 
@@ -226,18 +262,16 @@ elif menu == "🚁 Escáner Táctico (IA)":
 # ==========================================
 elif menu == "ℹ️ Contexto y Equipo":
     st.markdown("<h1 class='main-title'>🏭 Sobre AeroStock</h1>", unsafe_allow_html=True)
-    
     c1, c2 = st.columns([2, 1])
-    
     with c1:
         st.markdown("""
-        ### Dron Táctico con Inteligencia Operativa
-        **AeroStock** no es un dron de inventario tradicional; es un auditor cognitivo. 
-        Desarrollado para el **Hackathon InnoLabs Nestlé ESPOL 2026**, resuelve tres cuellos de botella críticos:
+        ### Dron Táctico con Inteligencia Operativa y Trazabilidad
+        **AeroStock** fue desarrollado para el **Hackathon InnoLabs Nestlé ESPOL 2026**. 
+        Resuelve cuellos de botella alineándose con las normativas de **Trazabilidad Alimentaria**:
         
-        1. **Ceguera Logística (Etiquetas dañadas):** Las etiquetas ASRS se dañan con la manipulación y el film de las cámaras de frío (-20°C). AeroStock reconoce el empaque gracias a Computer Vision aunque no haya QR.
-        2. **Error Humano ASRS:** Cuando un operario arregla una falla en el rack automatizado, suele tipear mal el producto en SAP. AeroStock hace **Doble Verificación** (QR vs Foto Física) y detecta esta desalineación.
-        3. **Control Térmico y PEPS:** Mediante integración de IA, valida que los productos mantengan la estiba correcta y previene el bloqueo de lotes próximos a vencer.
+        1. **Alerta de Trazabilidad Perdida:** Un dron tradicional ignoraría un pallet sin QR. AeroStock detecta el producto con IA y genera una alerta crítica para restaurar el Lote y Fecha de Caducidad antes de que se pierda en el sistema.
+        2. **Doble Verificación (ASRS):** Cruza el ID del QR con una base de datos **SQLite** para extraer metadatos (Lote, Caducidad). Si el ERP dice "Nescafé" pero la cámara ve "Maggi", bloquea el error humano al instante.
+        3. **Control Térmico y FEFO:** Optimización de rotación de inventarios para asegurar el cumplimiento del método PEPS/FEFO.
         """)
     with c2:
         st.image("docs/images/logo_espol.png", width=150)
