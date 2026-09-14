@@ -49,17 +49,37 @@ def init_db():
         )
     ''')
     
-    # Datos pre-cargados que cumplen estrictamente con los 5 puntos del artículo de Nestlé
-    datos_prueba = [
-        ("NSL-001", "CAJA GALAK", "L-2026-GAL", "2026-09-01", "2027-01-15", "Fábrica Surindu", "500 cajas", "Óptima"),
-        ("NSL-002", "CAJA MAGGI", "L-2026-MAG", "2026-09-05", "2026-11-30", "Fábrica Cayambe", "1200 cajas", "Óptima"),
-        ("NSL-003", "LECHE VAQUITA PEQ", "L-2026-VAQ", "2026-09-10", "2026-08-20", "Lácteos Ecuatorianos", "300 cajas", "Revisar Film"), # Vencido para probar FEFO
-        ("NSL-004", "CAJA GALLETAS RICA", "L-2026-RIC", "2026-09-11", "2027-02-10", "Fábrica Surindu", "800 cajas", "Óptima"),
-        ("NSL-999", "Nescafé Tradición", "L-2026-ERR", "2026-09-12", "2028-05-01", "Fábrica Guayaquil", "200 cajas", "Óptima") # ID trampa para el test de error humano
-    ]
+    # Leer labels.txt para generar la BD dinámica
+    datos_prueba = []
+    try:
+        with open("labels.txt", "r", encoding="utf-8") as f:
+            labels = f.readlines()
+            
+        index = 1
+        for line in labels:
+            if not line.strip(): continue
+            parts = line.strip().split(" ", 1)
+            name = parts[1] if len(parts) > 1 else parts[0]
+            if "VACIO" in name.upper(): continue
+            
+            qr_id = f"NSL-{index:03d}"
+            # Metadatos falsos realistas
+            lote = f"L-2026-{index:03d}"
+            fecha_ingreso = "2026-09-01"
+            fecha_caducidad = "2027-01-15" if index % 2 == 0 else "2026-10-30"
+            proveedor = "Fábrica Surindu" if "RICA" in name.upper() or "GALAK" in name.upper() else "Nestlé Ecuador"
+            cantidad = f"{100 * index} cajas"
+            
+            datos_prueba.append((qr_id, name, lote, fecha_ingreso, fecha_caducidad, proveedor, cantidad, "Óptima"))
+            index += 1
+    except:
+        pass # Si falla labels.txt en init, simplemente avanza
+        
+    # Trampa para el test de desalineación
+    datos_prueba.append(("NSL-999", "ERROR-HUMANO (Desalineación)", "L-2026-ERR", "2026-09-12", "2028-05-01", "Desconocido", "1 pallet", "Óptima"))
     
     cursor.executemany('''
-        INSERT OR IGNORE INTO inventory_metadata (qr_id, producto, lote, fecha_ingreso, fecha_caducidad, proveedor, cantidad_recibida, condicion_empaque)
+        INSERT OR REPLACE INTO inventory_metadata (qr_id, producto, lote, fecha_ingreso, fecha_caducidad, proveedor, cantidad_recibida, condicion_empaque)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     ''', datos_prueba)
     
@@ -265,13 +285,15 @@ elif menu == "ℹ️ Contexto y Equipo":
     c1, c2 = st.columns([2, 1])
     with c1:
         st.markdown("""
-        ### Dron Táctico con Inteligencia Operativa y Trazabilidad
-        **AeroStock** fue desarrollado para el **Hackathon InnoLabs Nestlé ESPOL 2026**. 
-        Resuelve cuellos de botella alineándose con las normativas de **Trazabilidad Alimentaria**:
+        ### Plataforma Híbrida: Inteligencia Operativa y Trazabilidad
+        **AeroStock** fue desarrollado para el **Hackathon InnoLabs Nestlé ESPOL 2026** con una arquitectura de despliegue flexible para adaptarse a cualquier CEDIS:
         
-        1. **Alerta de Trazabilidad Perdida:** Un dron tradicional ignoraría un pallet sin QR. AeroStock detecta el producto con IA y genera una alerta crítica para restaurar el Lote y Fecha de Caducidad antes de que se pierda en el sistema.
-        2. **Doble Verificación (ASRS):** Cruza el ID del QR con una base de datos **SQLite** para extraer metadatos (Lote, Caducidad). Si el ERP dice "Nescafé" pero la cámara ve "Maggi", bloquea el error humano al instante.
-        3. **Control Térmico y FEFO:** Optimización de rotación de inventarios para asegurar el cumplimiento del método PEPS/FEFO.
+        * **Fase 1 (Semi-Autónomo / Operador Aumentado):** El dron actúa como herramienta guiada del montacarguista. Se vuela manualmente para auditar niveles altos (15m), procesando la IA y Trazabilidad en tiempo real en la tablet del operador (reduciendo riesgos de elevación).
+        * **Fase 2 (100% Autónomo / SLAM):** Patrullajes programados en la madrugada sin intervención humana, utilizando marcadores fiduciales.
+        
+        **Pilares del Auditor Cognitivo:**
+        1. **Alerta de Trazabilidad Perdida:** Si la IA detecta producto pero no hay QR, lanza una alerta para evitar la pérdida del Lote y Caducidad en SAP.
+        2. **Doble Verificación (ASRS):** Cruza el QR con **SQLite** (mock de ERP). Si SAP dice "Nescafé" pero la cámara ve "Maggi", bloquea el error humano al instante.
         """)
     with c2:
         st.image("docs/images/logo_espol.png", width=150)

@@ -190,7 +190,7 @@ Para garantizar que \textbf{AeroStock} sea realista para el contexto operativo d
 \begin{itemize}
     \item \textbf{Visión Computacional y Edge AI:} Implementamos un modelo de red neuronal convolucional (CNN) basado en \textit{TensorFlow (Keras)} capaz de ejecutarse en dispositivos ligeros sin consumir un ancho de banda masivo.
     \item \textbf{Framework Táctico:} Construido sobre \textit{Streamlit} y \textit{OpenCV}, permitiendo el procesamiento simultáneo de decodificación de códigos de barras (pyzbar) e inferencia visual de productos.
-    \item \textbf{Navegación Relativa (SLAMS sin GPS):} Se propone un vuelo autónomo basado en marcadores fiduciales de bajo costo (ej. AprilTags en racks) para navegación en interiores, manteniendo el hardware del dron por debajo de los USD \$1,000.
+    \item \textbf{Despliegue Híbrido (Viabilidad y ROI Inmediato):} Para garantizar su implementación con hardware de bajo costo ($<$ USD \$1,000), el sistema opera en dos modalidades. \textbf{Fase 1 (Semi-autónomo):} El dron actúa como \textit{herramienta táctica} guiada por el montacarguista, permitiendo auditar racks altos sin arriesgar al personal. \textbf{Fase 2 (Autónomo):} Navegación sin GPS (SLAM) con marcadores fiduciales para patrullajes nocturnos.
 \end{itemize}
 \end{keybox}
 
