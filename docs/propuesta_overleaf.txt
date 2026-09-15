@@ -264,17 +264,8 @@ El sistema es un puente directo a la filosofía \textbf{Industria 4.0} de Nestl�
 
 El procesamiento local gestiona las transacciones de lectura y validación cruzada sobre un esquema relacional ligero antes de impactar el maestro de materiales, garantizando que solo los registros verificados actualicen el stock contable y que las anomalías se canalicen a una bitácora de excepciones para auditoría continua. Esta versatilidad permite implementar la solución tanto en centros de distribución de alta densidad automatizados (ASRS) como en almacenes convencionales o bodegas de distribuidores locales, optimizando costos de adopción.
 
-% --- FRASE DE IMPACTO ---
-\newpage
-\vspace*{\fill}
-\begin{center}
-    {\Huge \bfseries \textcolor{NestleBlue}{«El futuro de la cadena de suministro no radica en escanear más rápido, sino en entender lo que se escanea.»}} \\[1.5cm]
-    {\Large \textit{--- Visión AeroStock OS}}
-\end{center}
-\vspace*{\fill}
-\newpage
-
 % --- PRUEBAS DEL PROTOTIPO ---
+\newpage
 \section{Pruebas del Prototipo en Vivo}
 
 \begin{keybox}
@@ -314,6 +305,16 @@ A continuación, se presentan las cuatro resoluciones operativas demostradas por
         \caption{\textbf{Auditoría de Vacíos:} El sistema confirma pasillos despejados sin falsos positivos.}
     \end{minipage}
 \end{figure}
+
+% --- FRASE DE IMPACTO ---
+\newpage
+\vspace*{\fill}
+\begin{center}
+    {\Huge \bfseries \textcolor{NestleBlue}{«El futuro de la cadena de suministro no radica en escanear más rápido, sino en entender lo que se escanea.»}} \\[1.5cm]
+    {\Large \textit{--- Visión AeroStock OS}}
+\end{center}
+\vspace*{\fill}
+\newpage
 
 % --- REFERENCIAS ---
 \newpage
