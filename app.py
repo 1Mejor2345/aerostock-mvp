@@ -69,8 +69,8 @@ def init_db():
             name = parts[1] if len(parts) > 1 else parts[0]
             if "VACIO" in name.upper(): continue
             
-            # Formato simulando código de barras EAN-128 / LPN
-            lpn_id = f"NSL1000{index:03d}"
+            # Formato simplificado para Códigos de Barras más fáciles de leer (líneas más gruesas)
+            lpn_id = f"N{index:02d}"
             
             # Metadatos falsos realistas
             lote = f"L-2026-{index:03d}"
@@ -85,7 +85,7 @@ def init_db():
         pass 
         
     # Trampa para el test de desalineación
-    datos_prueba.append(("NSL999999", "ERROR-HUMANO (Desalineación)", "L-2026-ERR", "2026-09-12", "2028-05-01", "Desconocido", "1 pallet", "Óptima"))
+    datos_prueba.append(("N99", "ERROR-HUMANO (Desalineación)", "L-2026-ERR", "2026-09-12", "2028-05-01", "Desconocido", "1 pallet", "Óptima"))
     
     cursor.executemany('''
         INSERT OR REPLACE INTO inventory_metadata (lpn_id, producto, lote, fecha_ingreso, fecha_caducidad, proveedor, cantidad_recibida, condicion_empaque)

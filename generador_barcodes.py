@@ -31,11 +31,18 @@ for line in labels:
     if "VACIO" in name.upper(): 
         continue 
     
-    # Usamos Code128 para soportar letras y números (simulando EAN-128 o SSCC/LPN)
-    lpn_id = f"NSL1000{index:03d}"
+    # Códigos ultracortos para que las barras sean muy gruesas y fáciles de leer por cámara
+    lpn_id = f"N{index:02d}"
     titulo = f"{lpn_id} - {name}"
     
-    # 1. Crear el código de barras
+    # 1. Crear el código de barras con opciones para hacerlo MÁS LEGIBLE (barras gruesas)
+    opciones = {
+        "write_text": False,
+        "module_width": 0.6,    # Barras mucho más gruesas (default 0.2)
+        "module_height": 25.0,  # Barras más altas
+        "quiet_zone": 10.0      # Más margen blanco alrededor
+    }
+    
     code128 = barcode.get('code128', lpn_id, writer=ImageWriter())
     # Guardar en memoria para manipular con PIL
     safe_name = name.replace(" ", "_").replace("/", "-")
@@ -43,7 +50,7 @@ for line in labels:
     ruta_base = os.path.join(carpeta_salida, nombre_archivo_base)
     
     # Genera ruta_base.png
-    filename = code128.save(ruta_base, options={"write_text": False})
+    filename = code128.save(ruta_base, options=opciones)
     
     # 2. Lienzo para escribir el título
     img_barcode = Image.open(filename).convert('RGB')
@@ -68,12 +75,12 @@ for line in labels:
     index += 1
 
 # Generar el Código de Barras especial para la desalineación
-lpn_id_error = "NSL999999"
+lpn_id_error = "N99"
 titulo_error = f"{lpn_id_error} - ERROR HUMANO"
 
 code128_error = barcode.get('code128', lpn_id_error, writer=ImageWriter())
 ruta_base_error = os.path.join(carpeta_salida, f"LPN_{lpn_id_error}_ERROR")
-filename_error = code128_error.save(ruta_base_error, options={"write_text": False})
+filename_error = code128_error.save(ruta_base_error, options=opciones)
 
 img_barcode_error = Image.open(filename_error).convert('RGB')
 ancho_bc, alto_bc = img_barcode_error.size
