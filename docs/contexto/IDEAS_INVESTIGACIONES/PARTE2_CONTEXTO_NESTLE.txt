@@ -1,0 +1,196 @@
+(Transcrito por TurboScribe. Actualizar a Ilimitado para eliminar este mensaje.)
+
+[Orador 1]
+Drones autónomos de inventario. Existe una forma de hacer inventario que es a través de los drones, estos son programados, utilizan cámaras y lectores RFID o lectores de código de barra. Y esto entonces haría que las personas no sean las que tienen que estar pistoleando cada uno de los códigos de barra para tomar el inventario, sino que sea el dron el que se vaya movilizando y vaya pistoleando lo necesario.
+
+También tenemos la opción del RFID con el etiquetado inteligente y estos serían los tags ya en los palettes, cajas, que podamos tener nosotros como con una sola lectura un masivo del inventario, digamos de que es casi que una una captura del inventario en un momento determinado y luego ese inventario se transmite directamente a nuestro sistema SAP, que es importantísimo, hay temas de integración. Otra opción son los robots de escaneo, que son robots que se van movilizando y van recorriendo los pasillos y van capturando cuáles son los inventarios en niveles bajos y medios, y bueno en niveles altos tendría que ver otra opción para poder irlos captando. Lo importante de estas tres opciones es que la información sea a tiempo real, que sea conectado con nuestro sistema, nuestro ERP, que sea eficiente y que sirva, o sea que funcione efectivamente para el equipo de la bodega y que económicamente de también un retorno de la inversión, porque toda solución, todo proyecto necesita ser correctamente mapeado para tener un retorno de la inversión.
+
+¿Qué es lo que nosotros esperamos de estas soluciones? Es que ya no exista un contenido manual, sino que ya sea automatizado, se baje la tasa de errores, se disminuyen los riesgos de seguridad, se mantenga los ciclos de inventario diario y que se mejore temas de precisión del inventario reduciendo los errores humanos. Ahora para poder tomar esta decisión es importante el diagnóstico, en principio entender completamente el problema, entender el contexto del problema, el alcance de la solución, luego en temas de piloto desarrollar un piloto que pueda ser fácil de entender cómo se manejaría la solución.
+
+Si hablamos de distintas opciones, hay opciones en las que se pueden desarrollar como productos mínimos viables o simulaciones de cómo sería la solución y cómo ésta afectaría positivamente al problema, o sea a la solución del problema. Luego tenemos la conexión, la integración de SAP, que es lo que ya hemos venido conversando y luego la implementación como tal, el tiempo de piloto, las etapas de la implementación y medir el retorno de la inversión. Entonces es una propuesta que puede ser escalable, que puede ser aplicable a otras bodegas, tiene que tener un retorno de la inversión analizado, ya es necesario que el estudiante analice en realidad cuáles son los costos del mercado, cuánto tiempo demoraríamos en pagar una inversión inicial y cómo sería el tema interno de todos los financieros.
+
+Esto básicamente para explicarte, tenemos estas tres opciones, si es que el estudiante tiene otra idea basado en el problema y el contexto del problema, pues completamente abiertos a poder entender su propuesta de solución y poder sobre todo comprender la factibilidad de la aplicación de esa solución. Aquí es importante, cosas que no se pueden cambiar, inventario tiene que seguir siendo diario, eso no es negociable, actualmente el inventario se realiza por unas aproximadamente unas 20 personas en el primer turno de la mañana, apenas llegan se realiza el inventario y esto demora unas dos horas aproximadamente. También es importante que ustedes sepan de que durante durante el inventario todos los procesos de bodega se detienen, todos los procesos de sistema, entradas y salidas de producto se detienen, se congelan, no puede haber movimiento dentro del sistema, por eso de que es un proceso no tan eficiente, pero es necesario porque detiene la bodega como tal.
+
+Entonces la idea es que a través de estas soluciones, el tiempo de inventario se reduzca, el costo de inventario, hablando de horas hombre, también se reduzca y que el proceso pueda ser mucho más eficiente. Eso es un poco la explicación, no sé si tienen alguna pregunta, me gustaría saber si tienen alguna pregunta.
+
+[Orador 2]
+Muchas gracias Ale, muchas gracias Mario, entramos prácticamente a la parte de preguntas y respuestas general para Ale y Mario, antes voy a comenzar con unas preguntitas que nos han colocado acá en el chat y nos indican si es que el formulario en la página de IGEP es exclusivamente para registrarse o será considerado como recepción de propuestas, efectivamente en esa misma página es registro y en el registro le va a permitir, le va a permitir una recepción de propuestas desarrolladas, así que por ese lado lo pueden hacer.
+
+Así que si hay alguna pregunta con respecto a la exposición entregada por Mario y por Ale, pueden echar la mano o la pueden escribir en el chat, porque no veo nada más en el chat. A ver, José Luis nos indica qué herramientas, software, programas usan en Nestlé actualmente para tener registro inventario. ¿Es posible tener acceso a programas que usan actualmente para ver qué datos toman y entender cómo funciona el código QR?
+
+Y si la solución fuera por drones, ¿qué tan desarrolladas esperarían ver un prototipo?
+
+[Orador 1]
+El sistema para el control de inventario es WMS, que es Warehouse Management System, está conectado directamente al SAP. No podemos darle acceso al SAP como tal, pero sí podemos como que transparentar qué información es la que nosotros tenemos, si tienes por ejemplo alguna pregunta de, yo qué sé, es por usuario o es por horas, te puedo resolver todas las consultas del tipo de base de datos que se utiliza, más no podría como compartir con un usuario porque es confidencial solamente para usuarios de la empresa. Y allí actualmente no manejamos códigos QR para las cajas, sino que manejamos códigos de barra.
+
+El código QR es algo que se está viendo para futuro, sin embargo, por el código de barras, eso es lo que almacena la información actual que necesitas, el código del material, el material, la fecha de expiración, que es importantísima porque no queremos que un material se caduque y no nos demos cuenta, y el lote, que es lo que describe cuándo fue hecho ese material. En temas de prototipado, pues yo tengo altas expectativas. En prototipado sí me gustaría ver algo un poco visual de cómo funcionaría.
+
+También un tema de parte del prototipado, temas de tiempos, si es que hablamos de un robotsito, cómo sería el tema del robotsito, cómo se movilizaría, cómo nosotros cuidamos de que no se choque con un monto de cargas, de qué tamaño sería, sería grande, pequeño, cómo se movilizaría. Entonces ese tipo de prototipado yo sí tengo altas expectativas de que podamos ver algo visual, algo que nos permita saber si es que eso es aplicable o no en ese nivel.
+
+[Orador 2]
+Perfecto.
+
+[Orador 3]
+Yo quiero solamente un paréntesis ahí si me permites Manuel, a todo el foro. Ecuador es un país que viene en la región, sí, al menos 10 añitos tecnológicamente hablando atrás de un Brasil, de un Chile, de un México. Muy probablemente aquí en Ecuador ustedes no van a encontrar hoy una solución súper integral para poder resolver un tema de inventario, para poder mover un producto de forma autónoma, pero la invitación a este ejercicio es salgamos de la caja, o sea comencemos a mirar qué es lo que hay de afuera, y obviamente con esa estructura de factibilidad técnica más financiera, hacer la propuesta que tengamos que hacer. Este es un ejercicio real, a todo el equipo que está acá conectado, este es un ejercicio real, es una dolencia que tenemos identificado acá con Alejandra, y para ser sinceros nosotros tenemos ya una propuesta para poder ojalá en el 2027 adoptarla acá en nuestras operaciones, pero queremos reafirmarla con esa propuesta que ustedes puedan traerla también acá.
+
+Atrévanse, propongan, no hay idea mala totalmente, aquí todas las ideas son muy buenas, pero comencemos a proponer realmente ese tipo de cosas que hoy no son conocidas acá, pero que probablemente Nestlé si las traiga como de primicia, ¿no? Eso quería Manuel, adelante.
+
+[Orador 2]
+Listo, muchas gracias. Bueno, igual van a poder desarrollar prototipos porque es un poco el objetivo y eso pues ya será motivo en el jacatón. En el jacatón podemos hablar un poco más del tema de prototipos y las propuestas.
+
+A ver, Jorge Méndez tiene hace algún momentito la mano alzada y después contestaré. Antes de darle paso a Jorge voy a contestar un par de preguntas en el chat. Me estaban preguntando si es que pueden enviar propuestas de ambos desafíos.
+
+No, deben de escoger una problemática específica y enviar la propuesta para esa problemática. Jairo pregunta si ya enviamos la propuesta desarrollada, ¿la pueden editar? Sí, la pueden editar y la pueden enviar.
+
+Me pregunta también si la grabación de la reunión será compartida. La grabación de la reunión va a ser compartida. Entonces, antes de pasar con las preguntas de Paulina y de Gonzalo, Jorge que está esperando un poco y puede hacer su pregunta actualmente.
+
+[Orador 4]
+Buenas tardes. Mi pregunta es cuando llegan los productos a la sede de Guayaquil, en donde tengo entendido que está el problema alimentario, ¿cuál es el proceso desde que llegan los pallets, desde que llegan todos los productos hasta que se vayan a los racks? La siguiente pregunta es que tan frecuentes son la pérdida de, de que tal vez hay un error humano, como decían.
+
+Y por último, ¿cuáles eran los códigos que mencionó durante la última intervención? Que mencionó algunos códigos que se escanean, el del pallet, el de los productos y no me acuerdo cuál es más. Gracias.
+
+[Orador 1]
+Vamos de atrás para adelante. Los códigos es el código de la unidad la más chiquita, es como la galletita amor. Ese es el código de unidad.
+
+Luego viene el código de display, que es como la fundita que tiene un pack de cinco galletas amor. Ese es el display, es el código del display. Tiene su propio EAN.
+
+EAN es el código de barras, así nosotros lo llamamos. Luego viene en la caja, ya la cajita de cartón. Ese es el código de caja o EAN 128.
+
+Es el código que almacena la información del material, el código del material, la fecha de expiración y el lote. Eso es el que más información almacena. Luego tenemos el código de etiqueta pallet.
+
+Etiqueta pallet, en cambio, almacena cuántos, cuántas cajas hay en ese pallet, qué materiales y toda la información de las cajas, la fecha de expiración y el lote, el lote de producción. Esos son los códigos. ¿Me repites la pregunta anterior?
+
+Jorge?
+
+[Orador 4]
+Disculpe, no me deja abrir la hora. Sí, la anterior pregunta era, ¿qué tan frecuente es la pérdida de productos por errores comunes?
+
+[Orador 1]
+La pérdida de productos, ponte que sea más o menos un 2% del total del inventario y suele pasar diariamente. La pérdida de productos es un riesgo diario que vivimos.
+
+[Orador 2]
+Muy bien, gracias, Ale. Tenemos una pregunta de Paulina. Nos pregunta si tienen rutas delimitadas para el traslado de inventario, es decir, ¿por dónde caminan los operadores?
+
+Esa parte de donde transitas en montacargas?
+
+[Orador 1]
+Es en el mismo pasillo, en el mismo pasillo transita el operador y el montacargas. Solamente que el montacargas tiene como que una lucecita que delimita un espacio, un área, y casi que cuando tú ves la lucecita en el piso no te atreves a caminar porque está ese identificador visual de cercanía. Pero sí, es en el mismo pasillo, transitan ambos.
+
+[Orador 2]
+Perfecto. Gonzalo también tiene una pregunta que nos indica, ¿los palets y demás productos siempre quedan orientados con la etiqueta hacia el pasillo o puede variar según quién los acomodo?
+
+[Orador 1]
+Ya, cuando se trata de etiqueta caja, eso puede estar en cualquier lugar. Está del otro lado y del lado frontal quizás no está, pero cuando se trata de etiqueta palet, siempre la etiqueta palet está hacia el pasillo, la etiqueta palet, la que lleva las cajitas.
+
+[Orador 2]
+Perfecto. Gonzalo también pregunta, ¿todas las cajas de un mismo lote llevan la misma etiqueta visible desde el pasillo o sólo la caja de arriba o de adelante?
+
+[Orador 1]
+Las cajas no necesariamente llevan la etiqueta visible del pasillo. Las cajas, no necesariamente cuando nos aproximamos un palet vemos todas las cajas con el sticker de la etiqueta de la caja hacia afuera. Eso no sucede.
+
+Lo que sí está hacia afuera es la del palet, pero no el de las cajas, no necesariamente.
+
+[Orador 2]
+Perfecto. Emilio nos pregunta, ¿hay alguna forma de poder tener una guía o algo visual del espacio de la parte de producción similar a lo que se nos mostró al inicio de la reunión?
+
+[Orador 3]
+Yo te puedo compartir, Manuel, un dibujo tipo layout donde converge el producto y de dónde viene cada línea de producción. Sí, yo te paso eso para que le compartas al equipo.
+
+[Orador 2]
+Perfecto, muy bien. Muchas gracias. Cristian, ya mismo te doy la palabra.
+
+Samuel Salazar nos pregunta, dice, disculpe, ¿habrá algún tipo de documento o información que se nos proporcionará para tener en cuenta en el desarrollo de las propuestas?
+
+[Orador 1]
+Pues no sé si con SPOL tienen algún formato, pero para mí es importante en el desarrollo de la propuesta que esté súper claro el tema de costos, tiempo de implementación y factibilidad del retorno de la inversión.
+
+[Orador 2]
+Sí, igual les recuerdo chicos también un poco la pregunta por ahí, recuerden cuáles son los criterios que se van a evaluar, que son el tema de la problemática, el tema de definir claramente cuál es la propuesta de valor, el diferenciador, cuál es la solución de una u otra forma. Igual las rúbricas se las vamos a pasar nuevamente dentro del equipo por correo para que ustedes la puedan tener. Carla nos pregunta, ¿cuántos metros de largo y ancho tiene cada pasillo en los inventarios?
+
+[Orador 1]
+Si mal no recuerdo, tiene de ancho tres metros y medio, que es lo que te pide la norma, tiene de ancho y de largo pues puede ser ¿Qué será Marito? ¿Unos 20 metros? Puede ser, pero aproximadamente eso.
+
+[Orador 2]
+Jay nos pregunta, Jay Palacios, ¿tienen algún sistema protocolo para identificación de cajas? Si normalmente los datos que tienen cada una están en el código de barras, ¿en qué parte de la caja está ese código? ¿Va impreso en algún sticker encima, a los lados?
+
+[Orador 1]
+Va en un sticker a un costado de la caja, puede ir uno solo, de hecho es un solo sticker de la caja a un costadito, cualquiera de los costados.
+
+[Orador 2]
+Perfecto, Jorge Mendes nos pregunta, ¿cuánto tiempo pasa desde que el producto llega a los racks hasta que se haga el inventario?
+
+[Orador 1]
+Lo que pasa es que el inventario es estacional, no es que hoy día entra todo el inventario y mañana sale todo el inventario. Tú tienes en la bodega 10 de inventario, por ejemplo, puedes tener 60 días de inventario, es que un pallet no se ha movido en 60 días o en 60 días se consume todo el inventario. Entonces, digamos de que hasta que el pallet entre y salga pueden pasar unos 30 días, dependiendo de la rotación del producto y en otro que es producto que sale como pal caliente, se puede ir en una semana o incluso en días.
+
+Hay otros productos que tienen menor rotación y salen en uno o dos meses, depende de la rotación del producto.
+
+[Orador 2]
+Perfecto, bueno antes de pasar a las preguntas extra, Cristian tenía la mano alzada hace un momento, así que no sé si le podemos dar la apertura para que pueda hacer la pregunta a Cristian.
+
+[Orador 1]
+Cristian?
+
+[Orador 2]
+Ah, lamentablemente parece que salió. Ahí está, ok, ya le están dando, ya ahora sí, Cristian, creo que ya puedes hacer tu pregunta.
+
+[Orador 5]
+Una consulta, era sólo la altura, comúnmente cómo sería, actualmente el operador sube una escalera, hablaron de los carritos, ¿cómo es esa parte?
+
+[Orador 1]
+Claro, en el modelo tradicional va el señor con su montacargas, el va atrapadito en el montacargas y llega hasta la ubicación, entonces el montacargas tiene el mástil y tiene las uñitas y con las uñitas agarra el pallet, lo baja y cuando lo baja ahí puedes hacer el pistoleo. Eso pasa todos los días, lo que pasa una sola vez al mes es que hay un equipito que se llama canastilla, que es como un montacargas, pero en vez de subir el operador quedarse abajo y subir la uñita, el operador sube con la uñita, ya como que una canastita que lo protege y le permite hacer el inventario así.
+
+[Orador 2]
+Muy bien, muchas gracias. José Luis Paladines tiene una pregunta, en caso de tener dudas mientras desarrollamos la propuesta, ¿cómo podemos comunicarnos con los speakers? Ok, José Luis, en esta etapa no hay comunicación con los speakers hasta que ustedes entreguen la propuesta, sino que ustedes entregan la propuesta y los que clasifican van a tener obviamente mayor apertura con todos los speakers, con todos los mentores para poder desarrollar una mejor propuesta todavía.
+
+En esta etapa inicial no hay un contacto, o sea toda la información que nos están pidiendo aquí pues justamente Mario o con Mario vamos a gestionar lo que nos están solicitando para poderles enviar por correo la información y podemos mostrar su propuesta, pero además de eso un contacto no va a poder ser. Otra duda del mismo José Luis, otra duda, ¿se ha iniciado con la automatización antes? ¿Ya han habido propuestas probadas antes que oportunidades de mejora o errores que podrían mencionar?
+
+[Orador 3]
+Yo te cuento, intralogísticamente nosotros tenemos automatización en líneas de procesos de producción, es decir una empaquetadora, un robot que acumula las cajas encima de los pallets sin necesidad de personas. Nestlé en Ecuador ya tiene un paso inicial en términos de automatización y la verdad al principio, si te hablo desde hace unos cuatro años atrás, cinco años atrás, se hubieron aprendizajes por supuesto, porque tal vez la dimensión que se le dio en cierto proceso de automatización en líneas de producción no era el correcto, pero se hicieron ajustes y hoy por hoy está operando. ¿Cuál es el siguiente nivel?
+
+El siguiente nivel es la conexión intralogística. Este proyecto que nosotros estamos proponiendo es, ok, la fábrica ya viene evolucionando, vamos también a meternos en la parte de supply chain o de logística de almacenes para poder también dar ese paso a automatización y hoy tal vez Ecuador no lo tiene, pero tenemos una ventaja como multinacional y ahí sí toca decirlo a mercados de Europa y Asia, ya tienen estos procesos 100% automatizados y es el reflejo que queremos tomar nosotros como mercado para poder hacer esa automatización, es decir, ya hay un aprendizaje interno que es el que al final nos va a servir a nosotros para dar ese paso de automatizar.
+
+Gracias.
+
+[Orador 2]
+Jorge nos pregunta ¿Cuánto es el presupuesto máximo que se tiene previsto para la solución?
+
+[Orador 3]
+Si quieres para la parte intralogística, porque tienen que verlo como independiente, recuerdan que mi proceso intralogístico está dado en una fábrica que tiene una bodega al lado, lo que Ale les presentó es la madre del almacenamiento de toda la operación de esas dos fábricas que les mencioné hace un momento, entonces ella les va a comentar un poquito cómo estructurar esa parte, pero si hablamos del proceso de automatizar movimiento de productos desde una línea de producción hacia un almacén, yo puedo tener un presupuesto de 100 mil y puedo tener uno de un millón de dólares, pero la respuesta de esto de aquí va a ser parte del trabajo de investigación con los datos que estamos proporcionando para que ustedes puedan calcular o dimensionar cuánto cuesta, y obviamente con un estándar más o menos de 3 a 3.5 años, ustedes me puedan decir si eso retorna al bolsillo de Nestlé. Entonces ahí están los datos, seguramente Manuel tú le compartes, es parte del ejercicio que ustedes puedan tener esa dinámica de ok, me va a costar 500 mil dólares, necesito tres equipos, pero Nestlé actualmente está perdiendo, me invento, 500 mil dólares también, es decir, en un año ellos recuperan esa inversión, es parte de la dinámica, los datos están ahí, ok? Efectivamente, sí, así como tú lo comentas.
+
+[Orador 2]
+Julio pregunta cuál es el área de los palets, bueno hace un momento ya Mario nos comentó que nos iba a hacer llegar las dimensiones y también nos están preguntando en general cuáles son las dimensiones de las cajas y cuántas cajas hay en cada palet.
+
+[Orador 1]
+Las dimensiones de las cajas son muy variables, pero las cajas por palet en promedio son 60, 60 cajas por palet. La caja puede ser, si ves una laptop, puede ser el tamaño de tu laptop con unos 20 centímetros de alto, eso puede ser el tamaño de las cajas que manejamos o puede ser muchísimo más grande, pero trabajemos con el con el promedio de 60 cajas por palet y una altura de un metro sesenta aproximadamente de alto del palet y un peso de máximo 800 kilos.
+
+[Orador 2]
+Ok, perfecto. Jorge nos consulta qué esperan como propuesta de desarrollar el primer reto, la fábrica recrea más o menos, qué tanto hay que desarrollar la propuesta. Nuevamente eso está en las rúbricas, en función de las rúbricas se va a evaluar la propuesta en general.
+
+Ezequiel nos pregunta, ¿hay una única ruta para el traslado de los palets?
+
+[Orador 3]
+A ver, si hablamos intralogísticamente, tenemos un acceso y eso es súper interesante, si me permite te voy a responder mirando la pantalla, ok? Rapidísimo para que vean un poquito lo que te voy a compartir Manuel, pero es una súper buena pregunta lo que nos acaban de hacer. Ya ven mi pantalla?
+
+Ok, esto de acá es una foto real, tiene un par de años atrás, hoy tenemos una adecuación un poco más avanzada, pero esta es la fábrica del sur, este es el área de galletas y aquí en esta parte que ustedes ven de fondo, donde hay unas maquinitas, unos palets encimados y de fondo donde dice Nestlé hay unos palets que están esperando ser tomados, junto a eso ustedes ven un acceso, ahí hay una puerta, entonces todo el producto que se produce en esta sección tiene que pasar sí o sí por esta puerta, pero ojo ahí, recuerden un poco la distancia que yo les mencionaba por medio de 15, 20, 25 metros entre el área de producción hacia la bodega, no significa de que no tengamos tal vez la posibilidad de mirar otros accesos en esta pared, que me permita a mí de pronto aficionar el tema del ingreso y la salida de los equipos o el producto, pero hoy la realidad es que sólo cuento con este acceso, tienen una pared para poder hacer otro acceso, ahí les estoy dando un dato, pero realmente no hay una restricción en ese sentido. Otro dato importante que es lo que te voy a pasar Manuel rapidísimo para que lo vean también, es parte del paquete que te voy a compartir, es el layout, aquí están todas las áreas de producción, la parte superior que es la foto que les acabo de mencionar, donde está la parte de galletas, acá está waffle y chocolate, este es el almacenamiento, la parte inferior donde están todos estos cuadritos, no sé si ven ahí mi cursor moverse, y aquí tiene que converger todo el tema de producto, entonces ustedes van a tener que mover producto de aquí a acá, de aquí a acá, de aquí a acá, esta información les voy a compartir a ustedes para que puedan hacer el ejercicio, de acuerdo, ahí está un poco dividido por las áreas.
+
+[Orador 2]
+Muy bien, perfecto, bueno, en el tema de distancia, qué distancia recorre, yo creo que a lo mejor en ese caso pues lo van a poder ver en el mismo plano, no verdad? Reggie pregunta, dentro de la bodega manejan productos que necesitan refrigeración o cadena de frío, y si es así, cómo controla y monitorea actualmente la temperatura en esas zonas?
+
+[Orador 1]
+Hay termohidrómetros que controlan la temperatura, están activados con IoT, que es como el internet de las cosas, y ellos son los que notifican al área de calidad si es que sale del rango permitido la temperatura del almacén.
+
+[Orador 2]
+Perfecto, Jorge Méndez nos pregunta acerca de la sede sur, el transcurso de los 20 metros, hay paredes o es un viaje bien recta? Nuevamente Mario creo que nos va a entregar un poco el plano, así que ahí lo vamos a poder revisar. Jorge nos vuelve a preguntar, la propuesta que presentar es solución para las unidades?
+
+No Jorge, hay que escoger una de las dos problemáticas que quieras trabajar y te vas a enfocar solamente en una de las dos problemáticas, no escoges las dos, solo una. Y Marcia nos pregunta, cuando hablan de utilizar drones, esperan que el prototipo incluya realmente la parte de navegación del dron o podemos simular el recorrido y enfocarnos en la solución del análisis inventario?
+
+[Orador 1]
+No entiendo la pregunta, la parte de navegación del dron, o sea exactamente cómo se mueve? No, no se espera tanto a nivel de detalle, pero sí la generalidad de cuánto costaría el dron, cómo sería para que el dron no se choque y para que no se choque con los montacargas, o sea como analizar la seguridad, pero no el recorrido específico, porque aparte el recorrido es variable también.
+
+[Orador 2]
+Perfecto. Elian dice que se puede cambiar de desafío si ustedes pueden enviar una propuesta y cambiar de desafío que cualquiera en trabajar. Y finalmente Jay nos pregunta, qué tipos de robot usan para la movilización de cajas o pallets?
+
+[Orador 1]
+Para mí o para Mario? Para mí no necesariamente un dron, un robot son, ya está el yale manual que es como un cosito que tú le jalas al pallet, tiene una estructura en donde se toma el pallet y se jala. Tenemos la carretilla horizontal que jala dos pallets a lo largo, la carretilla doble vertical que jala dos pallets.
+
+(Este archivo dura más de 30 minutos. Actualizar a Ilimitado en https://turboscribe.ai/es/ para transcribir archivos de hasta 10 horas.)

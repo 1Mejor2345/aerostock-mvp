@@ -6,18 +6,18 @@ graph TD
     classDef success fill:#10B981,stroke:#065F46,stroke-width:2px,color:white;
 
     S([Escaneo de Pallet / Zona Picking]):::start --> P1[Captura Simultánea de Imagen]:::process
-    P1 --> Q1[Proceso A: Decodificación QR]
+    P1 --> Q1[Proceso A: Decodificación de Código de Barras]
     P1 --> Q2[Proceso B: Reconocimiento Visual de Cajas]
 
-    Q1 --> D1{¿QR Ilegible o\ntapado por Film?}:::decision
+    Q1 --> D1{¿Código Ilegible o\ntapado por Film?}:::decision
     
     %% Caso: Etiqueta Rota
     D1 -- SI --> P2[El sistema confía 100% en la IA Visual]:::process
     Q2 --> P2
     P2 --> E1[ALERTA TÁCTICA: \nImprimir nueva etiqueta]:::error
 
-    %% Caso: QR detectado
-    D1 -- NO --> D2{¿El lote del QR coincide\ncon la IA visual?}:::decision
+    %% Caso: LPN detectado
+    D1 -- NO --> D2{¿El lote del código coincide\ncon la IA visual?}:::decision
     Q2 --> D2
     
     %% Error Humano ASRS

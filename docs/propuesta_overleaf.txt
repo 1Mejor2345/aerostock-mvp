@@ -166,9 +166,7 @@
 % ══════════════════════════════════════════════════════════
 
 \section{Problemática}
-De acuerdo con nuestras investigaciones y la validación técnica mediante consultas directas con especialistas en intralogística, sistemas ASRS (Automated Storage and Retrieval Systems) y control de inventarios de Nestlé, identificamos que el proceso actual presenta fallas críticas originadas por la baja automatización y la dependencia de la transcripción manual humana.
-
-El problema trasciende la simple <<lectura de inventarios>> y se fragmenta en tres puntos críticos (la ceguera logística):
+De acuerdo con nuestras investigaciones y la validación técnica mediante consultas directas con especialistas en intralogística, almacenamiento de alta densidad y control de inventarios de Nestlé, identificamos que el proceso actual presenta fallas críticas originadas por la baja automatización y la dependencia de la transcripción manual humana. El almacén opera a gran escala con \textbf{más de 24,000 posiciones de almacenamiento} y racks de hasta \textbf{12 metros de altura}, manteniendo un nivel actual de \textbf{$\sim$0\% de automatización} en el control de inventario. Actualmente, la auditoría física se ejecuta cada mañana movilizando a \textbf{20 operarios durante 2 horas continuas} (40 horas-hombre diarias). Para efectuar este proceso, \textbf{la maquinaria, montacargas y líneas de despacho se paralizan por completo durante esas 2 horas}, generando tres brechas críticas:
 
 \begin{figure}[H]
     \centering
@@ -177,20 +175,21 @@ El problema trasciende la simple <<lectura de inventarios>> y se fragmenta en tr
 \end{figure}
 
 \begin{enumerate}
-    \item \textbf{Etiquetas Dañadas en Pallet (Ceguera Logística):} El film plástico de embalaje y el roce mecánico en racks dañan o bloquean la etiqueta maestra exterior (LPN/SSCC) del pallet. Si el lector óptico tradicional falla, el pallet completo y su lote asociado quedan «invisibles» para el sistema de inventario.
-    \item \textbf{Desalineación ASRS (Error Humano):} Cuando ocurren errores mecánicos en almacenes automatizados, la intervención humana para corregirlos suele generar inconsistencias; el operario registra un producto equivocado en el ERP (ej. Etiqueta marca \textit{Nescafé} pero físicamente es \textit{Maggi}). Un dron tradicional que solo lee etiquetas perpetúa este error.
-    \item \textbf{Gestión Ineficiente de Zonas de Picking:} En distribución de alimentos, existen áreas de picking con pallets parciales (mixtos). Escanear la etiqueta máster no revela cuántas unidades físicas restan en el pallet, limitando la visibilidad del \textit{Stock de Seguridad}.
+    \item \textbf{Alto Riesgo Laboral en Altura:} La verificación en los niveles superiores (10--12\,m) exige elevar personal en canastas sobre montacargas, exponiendo al equipo a riesgos laborales críticos de caída.
+    \item \textbf{Parálisis Operativa y Cuellos de Botella:} Detener la actividad de la bodega durante 2 horas cada mañana genera costos ocultos de re-trabajo, retrasos en la expedición de pedidos matutinos y maquinaria pesada improductiva.
+    \item \textbf{Ceguera Logística por Etiquetas Dañadas:} El film plástico de embalaje y el roce mecánico en racks deterioran la etiqueta maestra exterior del pallet. Si el lector óptico tradicional falla, el pallet completo y su lote asociado quedan «invisibles» para el sistema WMS/SAP.
 \end{enumerate}
 \newpage
 \section{Viabilidad Técnica}
-Para garantizar que \textbf{AeroStock} sea realista para el contexto operativo de Nestlé, desarrollamos un prototipo funcional (MVP) utilizando herramientas COTS (Commercial Off-The-Shelf) y tecnologías open-source, evitando implementaciones invasivas o sensores costosos (como LiDAR).
+Para garantizar que \textbf{AeroStock} sea realista para el contexto operativo de Nestlé, desarrollamos un prototipo funcional (MVP) utilizando herramientas COTS y tecnologías open-source, evitando implementaciones invasivas o sensores costosos.
 
 \begin{keybox}
 \textbf{Arquitectura del MVP Desarrollado:}
 \begin{itemize}
-    \item \textbf{Visión Computacional y Edge AI:} Implementamos un modelo de red neuronal convolucional (CNN) basado en \textit{TensorFlow (Keras)} capaz de ejecutarse en dispositivos ligeros sin consumir un ancho de banda masivo.
-    \item \textbf{Framework Táctico:} Construido sobre \textit{Streamlit} y \textit{OpenCV}, permitiendo el procesamiento simultáneo de decodificación de códigos de barras (pyzbar) e inferencia visual de productos.
-    \item \textbf{Navegación Relativa (VIO asistida por AprilTags):} Se propone un vuelo autónomo basado en Odometría Visual-Inercial (VIO) complementada con marcadores fiduciales de bajo costo (AprilTags fijados en vigas de racks) que resetean la deriva acumulada (\textit{drift}) en interiores sin GPS, manteniendo el costo total de hardware por debajo de los USD \$1,000.
+    \item \textbf{Visión Computacional y Edge AI:} Pipeline ligero en OpenCV y redes neuronales para la inferencia visual de marcas/empaques máster y decodificación en tiempo real de identificadores de pallet (LPN) y códigos GS1-128.
+    \item \textbf{Gestión de Datos e Integración WMS/SAP:} Motor sobre SQLite (demostración) desacoplado que utiliza el identificador leído como clave primaria para consultar el maestro de materiales (lote, fecha FEFO, SKU), canalizando discrepancias sin alterar registros contables a ciegas.
+    \item \textbf{Seguridad Operativa y Evasión Activa de Obstáculos:} Navegación referenciada a la infraestructura fija existente complementada por balizas fiduciales maestras (AprilTags) situadas estratégicamente en cabeceras de pasillo para resetear la deriva. Incorpora un protocolo de seguridad visual que detecta tránsito de montacargas u operarios, ejecutando frenado preventivo y reanudación de misión sin entorpecer la dinámica del almacén.
+    \item \textbf{Código Fuente y Trazabilidad Open-Source:} El repositorio completo del MVP, scripts de inferencia y esquema de datos están disponibles en: \url{https://github.com/1Mejor2345/aerostock-mvp.git}
 \end{itemize}
 \end{keybox}
 
@@ -215,20 +214,18 @@ Para garantizar que \textbf{AeroStock} sea realista para el contexto operativo d
 \end{figure}
 
 \section{Diferenciación}
-El mercado está saturado de drones de inventario que simplemente escanean códigos. \textbf{AeroStock} se diferencia drásticamente al transformarse en un \textit{Auditor Cognitivo} en lugar de un lector pasivo.
+El mercado está saturado de drones de inventario que simplemente escanean códigos. \textbf{AeroStock} se diferencia drásticamente al transformarse en un \textit{Auditor Cognitivo} en lugar de un lector pasivo. Nuestra innovación se fundamenta en un flujo de \textbf{Verificación Jerárquica con Manejo de Incertidumbre}:
 
-Nuestra mayor innovación radica en la \textbf{Doble Verificación Cognitiva}:
 \begin{enumerate}
-    \item \textbf{Decodificación de Etiqueta Maestra (LPN / SSCC):} El dron escanea la etiqueta exterior adherida al pallet, extrayendo en tiempo real el identificador que vincula en SAP el número de lote, material y fecha de vencimiento.
-    \item \textbf{Auditoría Visual Multinivel:} En racks masivos, la IA reconoce las \textbf{cajas corrugadas máster} (mediante patrones de color, logos y tipografía de marcas como Maggi, Nescafé o Amor). En zonas de picking abiertas, detecta los empaques primarios o packs visibles en la capa superior.
+    \item \textbf{Auditoría Primaria de Etiqueta Exterior (LPN/SSCC):} El dron prioriza el escaneo de la etiqueta maestra exterior del pallet (visible hacia el pasillo sobre el film estirable), extrayendo el ID único que enlaza en SAP el número de lote, material y fecha de vencimiento.
+    \item \textbf{Validación de Atributos Visibles y Fallback GS1-128:} Ante empaques corrugados genéricos o estibas trabadas donde los códigos internos no están expuestos, la IA audita patrones exteriores distintivos (cintas impresas, logotipos corporativos como Maggi, Amor o Nescafé). Si una caja perimetral expone su código \textbf{GS1-128 (EAN-128)}, el sistema lo decodifica para validar lote y caducidad de forma redundante.
+    \item \textbf{Protocolo de Excepción ante Falta de Visibilidad:} Si la etiqueta exterior del pallet resulta ilegible y las caras de las cajas no exponen códigos legibles hacia el pasillo, AeroStock no realiza deducciones especulativas. Registra la coordenada tridimensional exacta del rack en el WMS y genera una alerta con evidencia fotográfica en la tablet del supervisor para su revisión manual a nivel de suelo, blindando la integridad de SAP.
 \end{enumerate}
-
-Si los datos de la etiqueta discrepan del empaque observado (el QR marca \textit{Nescafé} pero la caja física corresponde a \textit{Galletas Amor}), AeroStock emite una alerta crítica de \textbf{Desalineación ASRS por Error Humano} y bloquea el pallet en el ERP. Ante etiquetas rotas o tapadas por film, el sistema no asume lotes a ciegas: activa el protocolo de \textit{Gestión por Excepción}, registrando la ranura exacta y enviando una captura fotográfica a la tablet del operador para su re-etiquetado manual, protegiendo la integridad de la base de datos de SAP.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth, keepaspectratio]{diagrama_2_doble_verificacion.png}
-    \caption{Árbol de Decisión: Doble Verificación Cognitiva (Resolución de Desalineación ASRS)}
+    \caption{Árbol de Decisión: Doble Verificación Cognitiva (Resolución de Discrepancias Físico vs. WMS)}
 \end{figure}
 
 \section{Propuesta de Valor}
@@ -241,16 +238,16 @@ AeroStock entrega beneficios directos enfocados en la trazabilidad y la eficienc
 \end{figure}
 
 \begin{itemize}
-    \item \textbf{Seguridad Laboral y Excepciones:} Operando como un Dron Táctico a demanda. En lugar de enviar un operario a 15 metros de altura en cámaras de frío (-20\,°C) para buscar un pallet extraviado, el operario lanza AeroStock desde su tablet. El dron localiza la anomalía en minutos reduciendo la exposición al riesgo en altura.
-    \item \textbf{Conteo Volumétrico por Capas en Picking:} Ante pallets abiertos con cajas internas no expuestas a la cámara perimetral, la IA combina detección de objetos en la capa superior con la geometría estándar del pallet ($120 \times 100$\,cm). Mediante el patrón de estiba configurado en el maestro de materiales, deduce matemáticamente las unidades de las camas inferiores, reportando el nivel de llenado exacto al sistema de inventarios.
-    \item \textbf{Control PEPS y FEFO Espacial:} El sistema cruza la posición física tridimensional mapeada por el dron con la fecha de expiración registrada en el ERP. Si un pallet próximo a vencer quedó bloqueado detrás de lotes con caducidad más lejana, AeroStock emite una orden prioritaria de reubicación física en el WMS.
+    \item \textbf{Recuperación de Parada Operativa (2 hrs/día):} Habilita inventarios continuos o en horarios de baja actividad sin detener las operaciones de bodega, recuperando 40 horas-hombre diarias y eliminando la exposición de personal en canastas a 12 metros de altura.
+    \item \textbf{Auditoría de Cantidades y Volumetría en Picking:} Para pallets estándar cerrados, el sistema extrae directamente la cantidad teórica de cajas registrada en la etiqueta maestra del pallet y en SAP. En bahías de picking abierto o pallets fraccionados, la IA audita la capa superior visible y compara la volumetría física contra las unidades declaradas en el sistema, detectando mermas o extracciones no registradas sin requerir conteo manual pieza por pieza.
+    \item \textbf{Control FEFO Espacial:} Cruce automático de la posición tridimensional del pallet con la fecha de caducidad registrada en el ERP. Si un lote próximo a vencer queda físicamente bloqueado detrás de stock con caducidad más lejana, el sistema emite una orden prioritaria de reubicación en el WMS.
 \end{itemize}
 \newpage
 \section{Sostenibilidad}
 La sostenibilidad de AeroStock radica en la \textbf{reducción masiva del desperdicio de productos (Shrinkage)} y el ahorro de recursos energéticos y mecánicos:
 \begin{itemize}
-    \item \textbf{Auditoría de Frío (Módulo Opcional - Fase 2):} Arquitectura modular preparada para incorporar microcámaras térmicas radiométricas orientadas a detectar fugas de temperatura o microclimas anómalos en techos de cámaras frigoríficas, preservando la cadena de frío sin comprometer el techo presupuestario del MVP táctico base (< USD \$1,000).
-    \item \textbf{Eficiencia Energética y de Maquinaria:} Elimina las horas de conducción de montacargas buscando lotes extraviados a ciegas, optimizando baterías y reduciendo la huella operativa en planta.
+    \item \textbf{Convergencia con Infraestructura IoT Térmica (A futuro):} En lugar de encarecer el hardware del dron con sensores térmicos a bordo, AeroStock se integra vía API/MQTT con los \textbf{termohidrómetros IoT existentes} en la bodega. Ante una fluctuación anómala de temperatura reportada por un sensor de pasillo, el dron ejecuta misiones tácticas inmediatas para auditar visualmente los lotes en riesgo en dicha zona fría.
+    \item \textbf{Eficiencia de Maquinaria y Desperdicio Cero:} Disminuye el tránsito improductivo de montacargas buscando pallets desalineados a ciegas, optimiza el uso de baterías y asegura una rotación FEFO estricta para evitar mermas por vencimiento de producto perecible.
 \end{itemize}
 
 \begin{figure}[H]
@@ -262,16 +259,22 @@ La sostenibilidad de AeroStock radica en la \textbf{reducción masiva del desper
 \section{Escalabilidad}
 El sistema es un puente directo a la filosofía \textbf{Industria 4.0} de Nestlé. Al estar desacoplado de hardware privativo, \textbf{AeroStock} opera sobre una arquitectura de software abierta capaz de conectarse como microservicio o API hacia el ERP central (SAP S/4HANA mediante servicios REST/OData). 
 
-El procesamiento local gestiona las transacciones de lectura y validación cruzada sobre un esquema relacional ligero antes de impactar el maestro de materiales, garantizando que solo los registros verificados actualicen el stock contable y que las anomalías se canalicen a una bitácora de excepciones para auditoría continua. Esta versatilidad permite implementar la solución tanto en centros de distribución de alta densidad automatizados (ASRS) como en almacenes convencionales o bodegas de distribuidores locales, optimizando costos de adopción.
+El procesamiento local gestiona las transacciones de lectura y validación cruzada sobre un esquema relacional ligero antes de impactar el maestro de materiales, garantizando que solo los registros verificados actualicen el stock contable y que las anomalías se canalicen a una bitácora de excepciones para auditoría continua. Esta versatilidad permite implementar la solución aprovechando la conectividad Wi-Fi y estructuras fijas existentes en el centro de distribución, haciéndola adaptable tanto a almacenes masivos de 24,000 posiciones como a bodegas intermedias de distribuidores locales.
 
 % --- PRUEBAS DEL PROTOTIPO ---
 \newpage
 \section{Pruebas del Prototipo en Vivo}
 
 \begin{keybox}
-\textbf{Acceso al MVP Desplegado (Streamlit Cloud):}\\
-Los jueces y validadores técnicos pueden interactuar con el sistema, probar el motor de IA y visualizar los dashboards en tiempo real a través del siguiente enlace:\\[0.2cm]
-\url{https://aerostock-mvp-j6kbkf2pvofbvwurfbqkmu.streamlit.app/}
+\textbf{Acceso al MVP Desplegado y Demostración Operativa:}\\
+Los jueces y validadores técnicos pueden interactuar con el sistema, probar el motor de IA y comprobar el pipeline en tiempo real:\\[0.2cm]
+\faExternalLink*\ \textbf{Web App en Vivo (Streamlit Cloud):}\\
+\url{https://aerostock-mvp-j6kbkf2pvofbvwurfbqkmu.streamlit.app/}\\[0.2cm]
+\faVideo\ \textbf{Video Demo (Simulación de Vuelo e Inferencia en Vivo):}\\
+\textit{Demostración de la cinemática de escaneo continuo y feed de video simulado mediante cámara móvil:}\\
+\url{https://www.youtube.com/watch?v=FrWGPUo4V9s&themeRefresh=1}\\[0.2cm]
+\textbf{Propuesta Técnica y Documentación (Overleaf):}\\
+\url{https://www.overleaf.com/6299967886zkqbkcgrhnng#0e1bd9}
 \end{keybox}
 
 A continuación, se presentan las cuatro resoluciones operativas demostradas por el \textbf{Auditor Cognitivo} durante las pruebas de concepto, comprobando la validación cruzada entre la lectura del dron y nuestra base de datos relacional de trazabilidad:
@@ -324,7 +327,7 @@ La fundamentación técnica y operativa de \textbf{AeroStock} se estructuró a p
 
 \begin{itemize}
     \item \textbf{Nestlé Professional. (2025).} \textit{¿Cómo implementar la trazabilidad alimentaria en tu negocio?}. Recuperado de: \url{https://www.nestleprofessional-latam.com/ec/tendencias-e-ideas/trazabilidad-alimentaria-restaurante}
-    \item \textbf{Filippo M. (Ingeniero Experto ASRS). (2026).} \textit{Validación de viabilidad intralogística para drones}. (Comunicación personal / Entrevista técnica directa). Documentación sobre desgaste de etiquetas y desalineación humana en almacenes automatizados.
+    \item \textbf{Filippo M. (Especialista en Intralogística y Almacenamiento). (2026).} \textit{Validación de viabilidad intralogística para drones}. (Comunicación personal). Consultoría sobre desgaste de etiquetas en film, errores de estiba y tiempos de auditoría en bodegas de alta densidad.
     \item \textbf{Abadi, M. et al. (2016).} \textit{TensorFlow: Large-Scale Machine Learning on Heterogeneous Distributed Systems}. arXiv preprint arXiv:1603.04467. Recuperado de: \url{https://arxiv.org/abs/1603.04467}
     \item \textbf{OpenCV. (2026).} \textit{Open Source Computer Vision Library}. Recuperado de: \url{https://opencv.org/} \quad \textbf{PyZBar.} \textit{Decodificación en Python}. Recuperado de: \url{https://pypi.org/project/pyzbar/}
     \item \textbf{InnoLabs ESPOL. (2026).} \textit{Hackathon Reto 02: Gestión Inteligente de Inventarios}. Documentación interna proporcionada para el caso de estudio Nestlé.

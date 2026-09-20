@@ -9,7 +9,7 @@ graph TD
     A[Dron Táctico AeroStock]:::drone -->|1. Feed de Video RGB/Térmico| B(Procesamiento Edge AI):::cloud
     
     subgraph Doble Análisis Simultáneo
-        B --> C{Lector QR / pyzbar}
+        B --> C{Lector Código de Barras / pyzbar}
         B --> D{Visión TensorFlow / Keras}
     end
     

@@ -1,9 +1,10 @@
 streamlit
-opencv-python-headless
+opencv-python
 pyzbar
 pandas
 pillow
 numpy
-tensorflow-cpu
+tensorflow
+python-barcode
 tf-keras
 qrcode[pil]
