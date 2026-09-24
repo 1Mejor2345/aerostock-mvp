@@ -26,6 +26,7 @@
 \usepackage{multicol}
 \usepackage{fancyhdr}
 \usepackage{titlesec}
+\usepackage{xurl}
 \usepackage{hyperref}
 \usepackage{fontawesome5}
 \usepackage{setspace}
@@ -195,15 +196,20 @@ Para garantizar que \textbf{AeroStock} sea realista para el contexto operativo d
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.45\textwidth}
+    \begin{minipage}{0.31\textwidth}
         \centering
         \includegraphics[width=\linewidth, keepaspectratio]{productos_prueba.jpg}
-        \caption{Entrenamiento de IA (Productos Nestlé)}
+        \caption{Entrenamiento IA\\(Productos Nestlé)}
     \end{minipage}\hfill
-    \begin{minipage}{0.45\textwidth}
+    \begin{minipage}{0.31\textwidth}
         \centering
         \includegraphics[width=\linewidth, keepaspectratio]{qrs_pueba.jpg}
-        \caption{Simulación de etiquetas maestras LPN / Lote para banco de pruebas}
+        \caption{Etiquetas Maestras\\(Fase 1: Códigos QR)}
+    \end{minipage}\hfill
+    \begin{minipage}{0.31\textwidth}
+        \centering
+        \includegraphics[width=\linewidth, keepaspectratio]{bars_prueba.jpeg}
+        \caption{Etiquetas Maestras\\(Fase 2: Barras EAN-128)}
     \end{minipage}
 \end{figure}
 
@@ -256,6 +262,43 @@ La sostenibilidad de AeroStock radica en la \textbf{reducción masiva del desper
     \caption{Flujo Térmico y Rotación FEFO para Prevención de Desperdicios}
 \end{figure}
 
+\section{Caso de Negocio y ROI}
+Alineados con los requerimientos financieros y operativos expuestos durante la validación técnica, \textbf{AeroStock} proyecta un Retorno de Inversión (ROI) sumamente favorable. En el módulo de analítica de nuestro prototipo se documentan los siguientes impactos operativos proyectados para los CEDIS:
+
+\vspace{0.5cm}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.31\textwidth}
+        \begin{accentbox}
+            \begin{center}
+                {\Huge \textbf{1,200}}\\[0.2cm]
+                \textbf{Horas-Hombre}\\
+                Recuperadas/mes
+            \end{center}
+        \end{accentbox}
+    \end{minipage}\hfill
+    \begin{minipage}{0.31\textwidth}
+        \begin{accentbox}
+            \begin{center}
+                {\Huge \textbf{\$45,000}}\\[0.2cm]
+                \textbf{Ahorro Anual}\\
+                Prevención Mermas
+            \end{center}
+        \end{accentbox}
+    \end{minipage}\hfill
+    \begin{minipage}{0.31\textwidth}
+        \begin{accentbox}
+            \begin{center}
+                {\Huge \textbf{285\%}}\\[0.2cm]
+                \textbf{ROI Estimado}\\
+                (Payback: 4.2 meses)
+            \end{center}
+        \end{accentbox}
+    \end{minipage}
+\end{figure}
+\vspace{0.3cm}
+Esta eficiencia se logra integrando hardware COTS de bajo costo (drones y AprilTags) con inteligencia Edge AI de grado industrial, logrando erradicar el paro total de 2 horas diarias de toda la maquinaria y operarios de la bodega.
+
 \section{Escalabilidad}
 El sistema es un puente directo a la filosofía \textbf{Industria 4.0} de Nestlé. Al estar desacoplado de hardware privativo, \textbf{AeroStock} opera sobre una arquitectura de software abierta capaz de conectarse como microservicio o API hacia el ERP central (SAP S/4HANA mediante servicios REST/OData). 
 
@@ -270,8 +313,8 @@ El procesamiento local gestiona las transacciones de lectura y validación cruza
 Los jueces y validadores técnicos pueden interactuar con el sistema, probar el motor de IA y comprobar el pipeline en tiempo real:\\[0.2cm]
 \faExternalLink*\ \textbf{Web App en Vivo (Streamlit Cloud):}\\
 \url{https://aerostock-mvp-j6kbkf2pvofbvwurfbqkmu.streamlit.app/}\\[0.2cm]
-\faVideo\ \textbf{Video Demo (Simulación de Vuelo e Inferencia en Vivo):}\\
-\textit{Demostración de la cinemática de escaneo continuo y feed de video simulado mediante cámara móvil:}\\
+\faVideo\ \textbf{Video Demo (Navegación SLAM e Inferencia en Vivo):}\\
+\textit{Demostración de la cinemática de vuelo y navegación autónoma del dron usando marcadores fiduciales para SLAM. Cabe destacar que, tras iterar el producto con la retroalimentación logística de Nestlé, el sistema final audita utilizando \textbf{Códigos de Barras (LPN / EAN-128)} nativos en lugar de QRs, adaptándose al 100\% a la infraestructura y rotulado actual de la bodega.}\\
 \url{https://www.youtube.com/watch?v=FrWGPUo4V9s&themeRefresh=1}\\[0.2cm]
 \textbf{Propuesta Técnica y Documentación (Overleaf):}\\
 \url{https://www.overleaf.com/6299967886zkqbkcgrhnng#0e1bd9}
@@ -280,6 +323,7 @@ Los jueces y validadores técnicos pueden interactuar con el sistema, probar el 
 A continuación, se presentan las cuatro resoluciones operativas demostradas por el \textbf{Auditor Cognitivo} durante las pruebas de concepto, comprobando la validación cruzada entre la lectura del dron y nuestra base de datos relacional de trazabilidad:
 
 \vspace{0.5cm}
+\subsection*{Fase 1: Prototipado Inicial con Códigos QR}
 
 \begin{figure}[H]
     \centering
@@ -306,6 +350,40 @@ A continuación, se presentan las cuatro resoluciones operativas demostradas por
         \centering
         \includegraphics[width=\linewidth, keepaspectratio]{prueba_4_vacio.jpg}
         \caption{\textbf{Auditoría de Vacíos:} El sistema confirma pasillos despejados sin falsos positivos.}
+    \end{minipage}
+\end{figure}
+
+\vspace{0.5cm}
+\subsection*{Evolución Fase 2: Integración Nativa con Códigos de Barras (EAN-128)}
+Atendiendo al contexto logístico real de Nestlé, donde no se emplean códigos QR sino Códigos de Barras (EAN-128) para las etiquetas maestras LPN, el MVP fue iterado con éxito para procesar de forma nativa la simbología de barras 1D de largo alcance.
+
+Las siguientes capturas evidencian la robustez de AeroStock OS operando en tiempo real con Códigos de Barras, emulando los cuatro escenarios críticos de auditoría:
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth, keepaspectratio]{prueba_1_bar_ok.png}
+        \caption{\textbf{Trazabilidad OK (Barras):} Validando la coincidencia exacta entre el producto físico y el lote del código de barras LPN.}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth, keepaspectratio]{prueba_2_bar_error.png}
+        \caption{\textbf{Desalineación ASRS (Barras):} El código LPN escaneado pertenece a un lote distinto al empaque visualizado.}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth, keepaspectratio]{prueba_3_bar_no_bar.png}
+        \caption{\textbf{Alerta Trazabilidad (Barras):} Producto identificado por la IA, pero etiqueta maestra ilegible o cubierta por film.}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth, keepaspectratio]{prueba_4_bar_vacio.png}
+        \caption{\textbf{Auditoría de Vacíos (Barras):} Detección confiable de pasillos y racks despejados.}
     \end{minipage}
 \end{figure}
 

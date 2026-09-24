@@ -32,28 +32,47 @@ while True:
   corners, ids, rejected = detector.detectMarkers(frame)
 
   if ids is not None:
-    # Dibujar los bordes automáticos sobre el frame
+    # Generar matriz de cámara aproximada para el celular
+    h, w = frame.shape[:2]
+    camera_matrix = np.array([[w, 0, w/2], [0, w, h/2], [0, 0, 1]], dtype=np.float32)
+    dist_coeffs = np.zeros((4,1))
+    
+    # Tamaño físico de tu cuadrito impreso (Ajusta este valor si lo imprimes más grande o pequeño)
+    # 0.078 significa 7.8 centímetros (Tamaño real impreso por el usuario)
+    MARKER_SIZE = 0.078 
+    obj_points = np.array([
+        [-MARKER_SIZE/2,  MARKER_SIZE/2, 0],
+        [ MARKER_SIZE/2,  MARKER_SIZE/2, 0],
+        [ MARKER_SIZE/2, -MARKER_SIZE/2, 0],
+        [-MARKER_SIZE/2, -MARKER_SIZE/2, 0]
+    ], dtype=np.float32)
+
     cv2.aruco.drawDetectedMarkers(frame, corners, ids)
 
     for i in range(len(ids)):
-        # Extraer el ID de forma segura sin importar la dimensión del array
         tag_id = int(np.ravel(ids[i])[0])
-        ubicacion = MAPA_RACKS.get(tag_id, f"Tag ID {tag_id} no registrado")
+        ubicacion = MAPA_RACKS.get(tag_id, f"Tag {tag_id} desconocido")
 
-        # Obtener la esquina superior izquierda
+        # MAGIA MATEMÁTICA: Resolver PnP (Perspectiva de N Puntos)
+        image_points = corners[i].reshape((4, 2))
+        success, rvec, tvec = cv2.solvePnP(obj_points, image_points, camera_matrix, dist_coeffs)
+
+        if success:
+            distancia_z = tvec[2][0] # La distancia en metros desde la cámara al papel
+            texto = f"Rack: {ubicacion} | Dist: {distancia_z:.2f}m"
+            
+            # Dibuja los Ejes 3D saliendo del papel (X=Rojo, Y=Verde, Z=Azul)
+            try:
+                cv2.drawFrameAxes(frame, camera_matrix, dist_coeffs, rvec, tvec, MARKER_SIZE)
+            except AttributeError:
+                cv2.aruco.drawAxis(frame, camera_matrix, dist_coeffs, rvec, tvec, MARKER_SIZE)
+        else:
+            texto = f"Rack: {ubicacion}"
+
+        # Dibujar el texto en pantalla
         c = corners[i].reshape((-1, 2))
         x, y = int(c[0][0]), int(c[0][1])
-
-        texto = f"Rack: {ubicacion}"
-        cv2.putText(
-            frame,
-            texto,
-            (x, y - 10),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.6,
-            (0, 255, 0),
-            2,
-        )
+        cv2.putText(frame, texto, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
 
   cv2.imshow("AeroStock - Navegacion por Racks (AprilTags)", frame)
 

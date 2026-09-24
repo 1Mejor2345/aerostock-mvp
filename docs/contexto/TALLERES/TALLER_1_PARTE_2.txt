@@ -1,0 +1,270 @@
+(Transcribed by TurboScribe. Go Unlimited to remove this message.)
+
+[Speaker 1]
+Cosas del interior, etcétera. Ya bueno, tendrá que ver. Tenemos un flujo.
+
+Puede ser que la parte más importante para ti no es el el tron y sí, porque puede ser que no trabaja con el dron. No vaya a realizar el dron y sí, que no tiene una forma particular. No es la parte innovadora para ti el dron, sino que la parte innovadora es pensar cómo es y el recorrido, el flujo, el flujo de cómo ingresa, de cómo sale, dónde pasa la persona, porque imagino que dónde están los los drones.
+
+No puede ser la persona. Entonces, dónde pasaría uno, repasaría el otro y tu trabajo. Entonces ahí no sería la maqueta del dron, que sí podría ponerlo en pequeño, pero sería la maqueta del almacén del espacio donde están los varios productos y pensar a los flujos como ingresa uno es el sistema para ti.
+
+La cosa importante de tu trabajo es ver cómo puede proporcionar una solución gracias a una a un sistema de ingresos y salida. Así que tu modelo, tu propuesta es, bueno, un plano donde tiene colores, donde tiene flecha, donde tiene elementos, personas, va a ser la personita, va a ser el dron, va a ser los varios productos. Esto es lo que tiene que ser, que para mí es más importante proporcionar y no la forma de hacer el dron.
+
+Así que hacerlo volar no te importa. Ok. Sí, dime.
+
+[Speaker 4]
+Buenas, buenas, buenos días. Disculpe, en el caso de la maqueta, en el caso de la maqueta, ¿las medidas? Porque he visto que falta un poquito de información con respecto a si queremos hacer una maqueta de ese tipo de modelado.
+
+Y no sé si nos las van a enviar antes o ahí mismo, en el día viernes.
+
+[Speaker 1]
+Ok, yo esta parte no la conozco, ¿no? Pero cuéntame un poquito, ¿cuáles son la información que tú dices que te falta? Para que ya aquí está Manuel, por si acaso.
+
+[Speaker 4]
+Por ejemplo, yo estoy metido en la problemática de transporte interna. Mis soluciones, mis posibles soluciones dependen bastante de cuánto tamaño esté en la entrada, por ejemplo, de la bodega, cuánto espacio tenemos disponible si queremos hacer un pequeño sistema de automatización en transporte. Yo que sé, AMR, por ejemplo.
+
+Y esas medidas son importantes porque dejan aclarar hipótesis, ya no haciendo hipótesis, sino teniendo datos claros.
+
+[Speaker 1]
+Ok, esta parte yo lo desconozco, ¿no? Habría que, bueno, ahí está Manuel que escuchó, ya va a tomar nota y imagino que le puede contactar. Pero yo imagino que a todo le falta esa información.
+
+Así que están jugando con lo mismo, ¿no? Están jugando con la información que tiene a disposición. Qué es lo que pueden hacer?
+
+Lo que tienen que demostrar es que con la información que tienen, ustedes pueden pensar a una una solución de alguna manera que la tenga que justificar. Claro, con una condición que bueno, es la medida tendría que estar ésta. Van a utilizar medidas estándar, por ejemplo.
+
+Van a ver lo que puede hacer es investigar cuáles son las medidas estándar de un lugar y así no tiene la información exactamente de ese lugar. Bueno, van jugando con medidas estándar. Así que bueno, si por si acaso está interesado en implementar, claro, tendrá que ajustarla a la medida que son de los pasos en concreto.
+
+Pero lo mismo que va a pasar con cualquier otro lugar o como decir, puede modificar el ingreso según la medida estándar que ustedes podrán utilizar esto. Pero imagino que si te faltan a ti, faltan los demás. Así que están jugando con la misma misma carta.
+
+Ok, vamos. Así que bueno, aquí tenemos materiales.
+
+[Speaker 5]
+Una consulta, disculpen, antes que siga. Entonces, o sea, mi pregunta es el día viernes nosotros vamos a tener que presentar como un prototipo para que ellos puedan como que decidir a ver si seguimos en la siguiente etapa. Pero este prototipo, o sea, como el mío tiene que ver con drones y eso, y eso ya es un poco más costoso.
+
+Cómo sería? O sea, o sería una demostración así de cómo funcionaría?
+
+[Speaker 1]
+Por lo que entendí, si trabaja solo el viernes, la actividad la van a hacer ahí viernes mismo. Si ahí tiene que estar. Entonces en esas cuatro horas tienen que hacer todo y no.
+
+Nada va a funcionar, nada va a tener electrónica, nada va a tener programaciones, sino que va a ser una idea plausible. Tiene que demostrar que la idea que usted tiene así le puede hacer porque usted tiene la base, tiene conocimiento, tiene la información que sí se puede hacer y que esta idea pueda solucionar algún tipo de problema que ellos tienen. Eso es lo que tienen que demostrar.
+
+No van a ser un prototipo, no van a ser una maqueta increíble, sino que va a ser un modelo que de alguna manera representa la característica más importante.
+
+[Speaker 5]
+Pero con este modelo, así sea pequeño, o sea, yo puedo como que ofrecer una demostración de cómo funcionaría, porque eso no es tan difícil.
+
+[Speaker 1]
+Claro. Claro, más ahora usted tiene que enamorar al cliente. Ya si usted tiene esta cartita más que lo demás no tiene, chévere, úsala.
+
+No tenga, no tenga miedo, no? Entonces cualquier cosa que tú tienes ya del TubeGround, utilízala estos días, ya? Ok, bueno, entonces, por qué tenemos que hacer algo físico?
+
+Sí, la parte del digital está perfecta. Sí, pero tenemos que ver que también esto, si es un objeto, en el caso del compañero o del compañero. Ok, ya en el caso de él no es la ergonomía entendida como algo que voy a manejar, que sí podría ser.
+
+Pero en el caso de él, sí. Bueno, ahí tiene que mostrar que sí puede existir un flujo de personas y de drones de. Bueno, entonces viene un poquito cuáles son los varios flujos y van a demostrar que pueda funcionar y la parte del modelo permite, si vamos a utilizar una escala correcta, mostrar que sí puede funcionar.
+
+No, entonces tengo, tengo ese espacio que tendría que ser el espacio correcto para poder ok, entonces voy a mostrar que sí funciona. En el caso que es algo que voy manejando, la parte de la ergonomía si es la interacción de la persona con el objeto. Entonces voy a crear algo que lo puedo tocar y puedo mostrar que esta nueva, no sé, botella o contenedor de cereales funciona mejor, no sé, porque no sé cuál es el reto, perdón, no sé cuál es el reto.
+
+Ya, pero así es, no? Entonces mostrar esta parte física. Ya, y claro, la.
+
+También la cuestión es si creo algo que me permite de interactuar con el jurado, con la persona que está evaluando y es algo agradable, entonces no voy a hacer algo que no sea agradable. Entonces evitamos de hacer algo que no la persona no quiere tocar. Tiene que ser algo que de alguna manera atrae la atención.
+
+Entonces creo esta interacción después de ver diez. Cuántos son ustedes? Veinte.
+
+Bueno, después de diez presentaciones ya estoy cansado. Todas las presentaciones ya casi que no lo veo, pero si rompo el patrón, le voy a mostrar algo, le permito que lo toque, lo permito que lo maneje, le hablo sobre. Ok, esta es la que le voy a comenzar a romper un patrón y le voy a despertar la atención a que me ha levantado la mano, si ya no.
+
+Ok, entonces lo que es permitido, permitido, porque permitido por la cuestión de tiempo, sí, claro, también la cuestión de periclosidad y que estamos con más personas, pero más que todo por la cuestión de tiempo. Entonces el cartón ya cartón cartoncillo, cosa que puedo cortar rápido. Plastilina, silicona, mejor caliente, porque si le van a dar el silicona, pero mejor que se caliente, porque si tenemos que esperar que se seque una un silicón, ya esperamos 10, 15 minutos.
+
+Es mucho tiempo, ya que el caliente rápido se unen las cosas. Cinta, cinta, cinta de papel, cinta de bueno. Ustedes decide.
+
+Hay cinta de colores que también puede aportar de alguna manera. No puede ser que el color de la Nestlé. Vamos a escoger también si voy a utilizar una cinta de papel.
+
+Vamos a ver si hay colores que puede funcionar bien. Podría ser ya lo que no es que está prohibido, repito, sino que no funciona bien. Entonces con la vinílica no quiero utilizarla para unir dos partes.
+
+Uy, la vinílica nunca termina. Resina, resina que además tiene olores, no? Masía de secado que necesita mucho tiempo para secar.
+
+No va a funcionar. Ok, también hay para unir partes. Si necesito que esta parte sea fija o que se mueva, ya que voy a utilizar.
+
+Entonces puede ser ligas, puede ser encaje particulares, puede ser con palillo, con elementos de varios, no puede ser de metales o que utiliza para para las hojas están perfectas, entonces clips, este tipo de cosas está perfecta. Tengo que decidir si es una aplicación fija o ya que tiene que mover. Entonces tengo que decidir esto y según esto escojo la solución.
+
+Ok, mmm. Bueno, entonces no vamos a utilizar cosas desde cero. Ya como le dije, mejor utilizar alrededor de ustedes y algo que ve en su casa.
+
+Creen que le puede de alguna manera solucionar algo que quiere transmitir, utiliza ya una botella que no es de ustedes, sino que es del hijo de la esposa, no importa que desaparezca por un día. Ya después no vamos a ver si regresa, pero utilicen algo que de alguna manera puede ayudarla para compartir su idea. La escala es importante.
+
+Utilizar escala. Ahora, cuando se hace una maqueta de estudio, a veces se deja de un lado, no? Pero es importante si es un producto que voy manejando, si es un producto donde voy a ingresar.
+
+La escala humana y realidad, saber dónde estoy y la persona como va a interactuar es importante. Así que si voy a hacer un producto, es bueno que ya tenga una escala. Escala puede ser una escala uno a uno, entonces escala natural.
+
+Si voy a hacer un prototipo de algo que es manejable, perfecto, escala uno a uno. O si no, una escala reducida. En caso de algo muy grande, claramente va a ser una escala reducida, pero es bueno utilizar una escala y la escala mejora es siempre poner una persona, si persona, si algo que puedo manejar, ok, soy yo que lo utilizo, pero en el caso de un espacio ponemos, vamos a poner una persona, una personita, ya una personita de tamaño que más o menos me hace entender, no?
+
+Cómo voy a interactuar con mi todo. Entonces hay la comprobación de uso en el caso de la escala uno a uno, con la mano, el peso. Puede ser que para usted es importante crear algo que tenga un peso particular, entonces, ¿qué es lo que puedo añadir para darle más peso, no?
+
+O que, bueno, probar el uso. Entonces, que algo que se pueda abrir, tocar, que tenga botones. Vamos a poner todo esto si a escala uno a uno.
+
+Ok, el consejo no es algo obligatorio, pero si lo tiene, se ve mejor. Si tengo una cajita que está hecha de cartón gris, se ve muy triste, no? Pero si es hecha de cartón gris, pero le voy a poner también encima el logo de la Nestlé o el logo de la empresa a la cual me estoy dirigiendo.
+
+De alguna manera se va a ver diferente. Y entonces ya imprimirlo nomás, imprime alguna hojita con la marca para que la tenga lista, la puedan cortar y la pegan encima el producto donde creen que pueda funcionar o que tenga etiquetas similares, si es un producto, etiquetas similares de ingredientes, no? Dónde va a estar el ingrediente?
+
+Ok, este tipo de cosas se va a mostrar en un producto que no es una simple cajita, sino que ya es un producto pensado para la distribución, ya? Entonces el logo, el color que voy a utilizar, si hay instrucción de ponerla en algún lado, ya eso va a mostrar un punto diferente. Ok, ahí como estaba indicando la figura humana, no?
+
+Entonces esto es, bueno, un diseño clásico de un producto de diseño. Y ahí está la representación de una chica, ya? Esto es fundamental.
+
+Muchas veces nosotros imaginamos el tamaño de un producto, no? Y después cuando, no sé si a alguien de ustedes le compró Intemo, ya después le llega otro tipo de producto, ya le quiere comprar un producto de ese tamaño y después le llega chiquitito, no? Porque no leíste la medida.
+
+Ahí justamente lo que hacen es, no te pone la personita, no? Sino que te ponen la medida escrita, ya? Y tú llega el producto y es yo.
+
+Entonces, cosa de ustedes, importante es ponerle, no? Recorten ya la personita de la altura del tamaño correcto para poder ubicar al lado, cerca del producto de lo que están haciendo. No solo en la parte, en la parte de la maqueta del modelo, sino también en la parte gráfica.
+
+Cuando lo van mostrando, ponga ahí una persona. Ok, bueno, esto dejamos de ladito, ya imágenes de estructura, imágenes de estética, no? Entonces, modelos de baja resolución, pero bueno, en arquitectura puede ser la cosa importante, la parte estructural, en la parte de automoción es si, como decirle, tiene una estética, si tiene un modelo que puede funcionar bien a nivel aerodinámico, ya aquí le voy a mostrar.
+
+Vamos a ver. Dejamos esto por ratito. Ok, aquí están alguna, alguna maquetita.
+
+[Speaker 2]
+Creo que hubo problemas con el Internet, esperemos un momento a ver si es que, si es que regresa. Sí, yo creo que se le fue la señal o se le apagó la computadora o algo pasó, así que esperemos un momentito para ver si, si regresa Francesco. Algo que quería acotar, que justo Francesco lo estaba mencionando y creo que Manuel ya lo dejó también en mensajes, es, recuerden que si la parte básica, primordial que ustedes tienen que hacer es el modelado digital, no?
+
+En donde obviamente, visualmente tengan imágenes de cómo ustedes ven la solución, ya como que medio en visualización de puesta en marcha dentro de la bodega, etcétera. Con la tecnología, recomendaciones, lo que sea que ustedes consideren. Eso es como que algo que sí o sí deberían tener.
+
+Y lo otro, que es una recomendación, es que quizás lleguen a una maqueta. Nosotros les vamos a dar materiales básicos, cartón, cartulinas, estiletes, etcétera, para que si es que quieren llegar a la parte física, lo puedan llegar a hacer, no? Pero básicamente lo más importante es que su modelado visual sea digital.
+
+Sí, es una idea.
+
+[Speaker 5]
+Este. Al momento de desarrollar la, como vamos a ir el día de viernes, o sea, yo puedo llevar algunas cosas como para que me sirvan de apoyo para armar la maqueta.
+
+[Speaker 2]
+Sí, claro que sí, claro que sí. Tampoco la maqueta completa ya hecha, no? Porque ya ahí estaríamos poniendo en desventaja a los demás.
+
+Pero sí, es por apoyo. Claro que sí. Ajá.
+
+No sé si alguien más tiene alguna pregunta.
+
+[Speaker 6]
+Sí, disculpe, una pregunta. Este es solo el día viernes. Nosotros vamos a poder visitar el bloqueje laboratorio en Facom, o sea, no podemos hacerlo antes.
+
+Tenemos que estar preparados para el día viernes.
+
+[Speaker 2]
+Ajá. De aquí mañana tenemos el taller. Mañana tenemos el taller de propuesta de valor a las nueve y media de la mañana.
+
+Que de hecho lo voy a impartir yo. Ya van a ver un poquito como que la parte conceptual de lo que queremos que aterricen de su solución. Les voy a poner un ejemplo de otro desafío.
+
+Y el día viernes básicamente es. Primero, para que para que empiecen desde el inicio a trabajar en la presentación. Por qué?
+
+Porque el entregable en su caso obviamente tiene que ver con el prototipo un poco desarrollado, pero tiene que ver también con el pitch, entonces, como son 20 equipos, ustedes van a tener que presentar primero un entregable que ya el mismo día les vamos a avisar cuáles es entregable, entonces que obviamente tiene como soporte el la presentación que va a ser un pitch. Entonces es como que ustedes van a tener realmente ese día para, digamos, de alguna forma, como que ya enmarcar toda la información más importante. Sí, porque obviamente ustedes tienen un montón de información en los documentos.
+
+Vimos que hay mucho respaldo. La parte de viabilidad técnica nos explica no las tecnologías, cómo se implementarían, etcétera. Pero en tiempo su entregable en realidad no puede tomar diez minutos una presentación, de hecho, ni siquiera cinco minutos.
+
+Entonces ya les vamos a decir cómo va a ser eso. Pero ese día vamos a hacer el taller de presentaciones efectivas, que es lo que falta, y ese día trabajamos y van a ustedes a entregar en el entregable, que no lo voy a decir todavía. Sí, Ángel.
+
+[Speaker 6]
+Sí, y también otra pregunta. Lo que pasa es que, por ejemplo, con mi compañero de grupo, nosotros estamos en el problema de transporte y nos hacen falta algunos datos, entonces imagino que ese día. Ese día pueden preguntar.
+
+Ahí nos tenemos que adaptar a eso. Y si es relevante como para decir un cambio en nuestro prototipado inicial, entonces tenemos todo ese tiempo hasta las 3 de la tarde, que son las speech, como tal. Sí, correcto.
+
+[Speaker 5]
+Yo tengo otra consulta. Lo que pasa es que mi compañero, con el que yo estaba haciendo grupo, él es de la provincia de Santa Elena, y hace dos días no sabíamos que íbamos a quedar seleccionados, me dijo que lo contrataron y que no puede apoyarme. O sea, no hay ningún problema.
+
+Yo igual puedo hacerlo solo porque igual lo estaba haciendo solo.
+
+[Speaker 2]
+Por efectos del otro, de, digamos, del concurso en general y del otro hackatón que nuevamente, miren que no se han tenido tanta fe, pero digamos que en dado caso ustedes lleguen a ganar y tienen que ir a Loja, tienes que ser tú con un integrante más que tiene que estar ese día en el concurso. O sea, es como que... Entonces puedes ser con otra persona.
+
+Yo lo puedo reclutar. Y nos envías un correito con qué persona ahora reemplazas al integrante y quién es el nuevo integrante. O sea, los 20 equipos ya están seleccionados.
+
+No podemos, digamos que, escoger a otro equipo aparte. Tampoco es que les vamos a descalificar, porque uno no puede. Pero sí necesitamos que estén los dos integrantes ese día.
+
+Por confort, creo que es lo cerca. Si algo le pasó a Francesco que se nos fue. Y bueno, ya casi es tiempo también de terminar.
+
+Sí, Fernando. Ah, perdón. Perdón, Fernando.
+
+Solamente déjenme volver a mencionar. Nadie preguntaba la ubicación. Entrando, ingresando en Spol.
+
+Verdad? No en la garita que viene de Parcón, que nosotros le llamamos. Sino justo donde están los dos semáforos.
+
+Está la policía, está la parada de buses. Verdad? Justo ahí, antes de ingresar a Spol.
+
+Ustedes hacen mano derecha, que está una estación de bicicletas. No como que se fueran a Copol, pero no van a Copol. Y avanzan un poquito más.
+
+Ahí es el edificio 3M, sí? Les vamos a enviar la ubicación de GPS por correo. Sí, para que no se pierdan y que puedan llegar fácilmente.
+
+Así que gracias por la pregunta, Nadia. Fernando, tú tenías una pregunta.
+
+[Speaker 7]
+En caso de que ya tengamos un prototipo, podemos continuarlo ese día, así que ya tenemos algo ya hecho.
+
+[Speaker 2]
+Sí. Sí, sí, sí. O sea, digamos que ese día ustedes pueden eh?
+
+Hacer preguntas, la información, pueden modificar algo de la solución a lo que presentaron y ese día ustedes ya digamos trabajan los cambios necesarios, lo que sean y bueno, el prototipo también. O sea, la parte visual o la maqueta, como les decíamos, pueden hacerla ahí. La parte visual, si ustedes ya más o menos pueden avanzar estos días, pueden hacerlo, no hay ningún problema.
+
+Entonces eso sí. Y me preguntan el evento en Loja, qué fecha sería el evento en Loja? Si no me equivoco, es la última semana de octubre que cae entre el 25 o 26 de son dos días allá.
+
+[Speaker 4]
+Si son dos días, es 27 y 28.
+
+[Speaker 2]
+Creo que es lunes y martes 26 y 27 de octubre y se escogen dos equipos, o sea, dos parejas son las que pasarían a esa final de hackatón, que se digamos que se verían con la Universidad de San Francisco y la UTPL. En el caso de los equipos, como me dicen, si fueron bastantes equipos que nos enviaron y solamente 20 seleccionados, es decir, 40 personas van a estar participando y de las 40 personas, solo cuatro personas van a ser ganadoras, que son quienes van a viajar a la ciudad de Loja. Ya tenemos a Francesco de regreso.
+
+No te.
+
+[Speaker 3]
+Hola, hola, cómo están? Perdón, se fue Internet.
+
+[Speaker 1]
+Ya aquí estoy con el celular, pero bueno, sí, estamos al final y realidad.
+
+[Speaker 3]
+Si quería mostrarle alguna alguna maquetita, no maquetas de cartones para indicarles solo que de verdad cada vez que se hace una un prototipo se pasa por la portada y la que tenemos el viernes. Una, una etapa inicial, pero de esta etapa inicial para ustedes, pues es el punto más importante, porque de ahí se va a ver si si este proyecto puede seguir o no, así que es de baja resolución, pero sí tiene que ser un buen producto.
+
+[Speaker 1]
+Nada más. No y si podría seguir, pero en realidad alguna diapositiva no la podemos mostrar, solo si tiene alguna pregunta y ahí debemos contestar.
+
+[Speaker 3]
+Ya que estoy aquí, debo mostrar el espacio. Este es el espacio que tenemos a disposición. Ahí está el producto que hicieron los profesores la semana pasada.
+
+Aquí tenemos el espacio de de impresión 3D. Este es el área que si pueden utilizar que el área de pintura. Aquí están trabajando.
+
+Y bueno, tenemos el área de cerámico. Aquí no hay mucho sentido de ingresar, pero sí hay horno para cerámico, etcétera. Y área de corte láser.
+
+[Speaker 1]
+Sí, esto es lo que tiene a disposición este día, pero ya les comento que les consejo que en realidad el trabajo lo hagan nomás en esta área de co-working.
+
+[Speaker 3]
+Ok, si tienen alguna pregunta.
+
+[Speaker 2]
+Gracias, Francesco. Ay, ay, ay, ay, ay.
+
+[Speaker 4]
+Si tienen alguna pregunta, disculpe. Es acerca mismo de mi propuesta. Como es en la fábrica de Nestlé, puedo llevar cierta parte ya construida de lo demás de la fábrica o solo me centro en la misma propuesta nomás, en lo que involucra más la propuesta.
+
+es que nosotros nos dieron un plano, nos dieron un plano, ya es toda la fábrica y tiene que estar muy bien a escala, eso no sé si...
+
+[Speaker 2]
+Claro, no, no, no, puede ser solamente una parte donde se enfoca su propuesta de solución, no es que tenga la paqueta con toda la fábrica, con todos los compañeros, no, si hay parte específica, yo que sé, me estoy inventando, en donde se puede ver cómo en el rack el, yo que sé, el drone empieza a escanear y cómo los, o si es que hay algo de movimiento de los cartones, esa parte, o sea, no es necesario que usaran todo.
+
+[Speaker 1]
+Si utilicen colores, por ejemplo, pueden utilizar cartoncillos de color diferente, si para ustedes un área es la área importante, pero también hay que usar alguna otra, movimiento, flecha, prepárense este tipo de herramienta que puede ser útil, poner una flecha que muestra un recorrido, líneas de colores, cinta que indica el recorrido, todo esto le ayuda bastante. Entonces, utilicen colores. ¿Qué más?
+
+[Speaker 2]
+Ya, nos hicieron ya bastantes preguntas también, Francesco.
+
+[Speaker 3]
+Sí, sí, sí, claro, pero por si acaso, cualquier otra cosa. Bueno, el día viernes creo que no voy a estar en realidad.
+
+[Speaker 2]
+No hay problema, no hay problema.
+
+[Speaker 3]
+Hay ayudantes que sí le van a seguir toda la actividad.
+
+[Speaker 2]
+Sí, muchísimas gracias, Francesco, por, por el tiempo. Bueno, quería ver, no sé si podemos hacernos una pequeña foto, si todos pueden encender su cámara antes de despedirnos. Y la encuesta que ahorita les voy a mostrar.
+
+Bueno, recuerden, mañana el taller de mañana es a las nueve y media de la mañana. Ese es de Propuesta de Valor. Les voy a poner ejemplos.
+
+Traten de asistir igual todos, por favor. Va a ayudar mucho para que ustedes conceptualmente entiendan qué tienen que presentar, cómo tienen que presentarlo, qué información utilizar, etcétera. Eso les va a ayudar mucho para que sean mucho más ágiles el día viernes, ¿no?
+
+Y se enfoquen ya en lo primordial, que es prototipo, y ya como que extraer la información para saber qué presentar de su solución. Les pedimos que realicen esta encuesta de satisfacción de este taller, del taller que ahorita en este momento está terminando de brindarles Francesco, y igual les vamos a enviar también por correo la información del taller de mañana, ¿sí? Para que mañana se conecten, entren al link, se puedan conectar y podamos arrancar.
+
+También tiene una misma duración, que lo importante, como pueden ver, es como que darles más un esquema, ¿no? De qué dentro de propuesta de valor ustedes deben presentar, porque hay una rúbrica en tema de impacto, y eso va a ser muy útil. Ok, esperamos que todos puedan ir encendiendo, bueno, realicen la encuesta y puedan ir encendiendo sus cámaras.
+
+(This file is longer than 30 minutes. Go Unlimited at https://turboscribe.ai/ to transcribe files up to 10 hours long.)

@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroStock OS | Nestlé Enterprise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F3F4F6; color: #1F2937; }
+        .nestle-blue { background-color: #00529B; }
+        .nestle-text-blue { color: #00529B; }
+        .nestle-red { background-color: #E32322; }
+        .nestle-text-red { color: #E32322; }
+        .card { background: white; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); border-top: 4px solid #00529B; }
+        .view { display: none; }
+        .view.active { display: flex; }
+    </style>
+</head>
+<body class="h-screen overflow-hidden flex flex-col">
+
+    <!-- Header Global -->
+    <header class="nestle-blue px-6 py-3 flex justify-between items-center shadow-md z-50">
+        <div class="flex items-center space-x-4">
+            <img src="/images/nestle_logo.png" class="h-6 filter brightness-0 invert">
+            <div class="h-5 w-px bg-blue-300"></div>
+            <h1 class="text-lg font-bold text-white tracking-widest">AEROSTOCK OS</h1>
+        </div>
+        <div class="flex items-center space-x-3 text-white text-sm font-bold">
+            <i class="fas fa-circle text-green-400 animate-pulse text-xs"></i> <span>EN LÍNEA</span>
+        </div>
+    </header>
+
+    <!-- VISTA 1: MENÚ PRINCIPAL -->
+    <div id="view-menu" class="view active flex-col items-center justify-center flex-grow bg-white">
+        <div class="flex items-center space-x-8 mb-8">
+            <img src="/images/logo_espol.png" class="h-16">
+            <div class="h-12 w-px bg-gray-300"></div>
+            <img src="/images/nestle_logo.png" class="h-16">
+        </div>
+        <h1 class="text-3xl font-bold mb-6 nestle-text-blue tracking-wider">AEROSTOCK TACTICAL HUB</h1>
+        
+        <!-- Selector de Cámara -->
+        <div class="mb-8 p-3 bg-gray-100 rounded-lg shadow-inner flex flex-col items-center w-full max-w-sm border border-gray-300">
+            <label class="text-sm font-bold text-gray-700 mb-1"><i class="fas fa-video mr-1"></i> Origen de Cámara</label>
+            <select id="camera-selector" onchange="changeCamera()" class="p-2 border rounded bg-white w-full text-center text-sm font-bold text-blue-800">
+                <option value="droidcam">Dron Principal (DroidCam IP Celular)</option>
+                <option value="0">Dron de Respaldo (Cámara Laptop)</option>
+                <option value="1">Cámara Externa (1)</option>
+                <option value="2">Cámara Externa (2)</option>
+            </select>
+        </div>
+
+        <div id="main-menu-options" class="flex gap-4">
+            <div onclick="selectMode('Nocturno')" class="cursor-pointer bg-gray-50 border-2 border-gray-200 p-4 rounded-xl w-64 text-center hover:border-[#00529B] hover:shadow-lg transition-all">
+                <i class="fas fa-route text-4xl nestle-text-blue mb-4"></i>
+                <h2 class="text-lg font-bold mb-2">Inventario Nocturno</h2>
+                <p class="text-xs text-gray-600">Revisión autónoma (Rack 1, 2 y 3).</p>
+            </div>
+            <div onclick="showAisleSelection()" class="cursor-pointer bg-gray-50 border-2 border-gray-200 p-4 rounded-xl w-64 text-center hover:border-[#00529B] hover:shadow-lg transition-all">
+                <i class="fas fa-boxes text-4xl nestle-text-blue mb-4"></i>
+                <h2 class="text-lg font-bold mb-2">Auditoría Específica</h2>
+                <p class="text-xs text-gray-600">Revisar un Rack puntual.</p>
+            </div>
+            <div onclick="selectMode('Picking', 'Mesa de Picking')" class="cursor-pointer bg-gray-50 border-2 border-gray-200 p-4 rounded-xl w-64 text-center hover:border-[#E32322] hover:shadow-lg transition-all">
+                <i class="fas fa-hands text-4xl nestle-text-red mb-4"></i>
+                <h2 class="text-lg font-bold mb-2">Zona de Picking</h2>
+                <p class="text-xs text-gray-600">Auditoría manual de sueltos.</p>
+            </div>
+            <div onclick="showView('view-history')" class="cursor-pointer bg-gray-50 border-2 border-gray-200 p-4 rounded-xl w-64 text-center hover:border-green-600 hover:shadow-lg transition-all">
+                <i class="fas fa-calendar-check text-4xl text-green-600 mb-4"></i>
+                <h2 class="text-lg font-bold mb-2">Historial Auditorías</h2>
+                <p class="text-xs text-gray-600">Reportes y Trazabilidad ERP.</p>
+            </div>
+        </div>
+
+        <div id="aisle-menu" class="hidden flex-col items-center">
+            <h2 class="text-xl font-bold mb-6">Seleccione el Rack a auditar:</h2>
+            <div class="flex gap-4">
+                <button onclick="selectMode('Especifico', 'Rack A1')" class="px-6 py-3 bg-[#00529B] text-white font-bold rounded shadow hover:bg-blue-800">Rack A1</button>
+                <button onclick="selectMode('Especifico', 'Rack A2')" class="px-6 py-3 bg-[#00529B] text-white font-bold rounded shadow hover:bg-blue-800">Rack A2</button>
+                <button onclick="selectMode('Especifico', 'Rack A3')" class="px-6 py-3 bg-[#00529B] text-white font-bold rounded shadow hover:bg-blue-800">Rack A3</button>
+            </div>
+            <button onclick="hideAisleSelection()" class="mt-6 text-gray-500 hover:text-gray-800 font-bold underline">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- VISTA 2: ESCÁNER / HUD EN VIVO -->
+    <div id="view-scanner" class="view flex-grow p-4 gap-4 bg-gray-100 flex-row min-h-0">
+        <!-- Contenedor Izquierdo -->
+        <div class="w-8/12 flex flex-col gap-4 relative min-h-0">
+            <div class="absolute top-4 left-4 z-40">
+                <button onclick="showView('view-menu'); systemState='IDLE';" class="bg-red-600 text-white px-4 py-2 rounded shadow font-bold hover:bg-red-700">
+                    <i class="fas fa-times mr-2"></i> ABORTAR MISIÓN
+                </button>
+            </div>
+            <div class="absolute top-4 right-4 z-40" id="btn-finalizar-ruta">
+                <button onclick="finishAuditCycle()" class="bg-green-600 text-white px-4 py-2 rounded shadow font-bold hover:bg-green-700">
+                    <i class="fas fa-flag-checkered mr-2"></i> FINALIZAR RUTA
+                </button>
+            </div>
+
+            <!-- Video -->
+            <div class="card flex-grow relative overflow-hidden bg-black border-4 border-gray-800 rounded-xl min-h-0">
+                <img src="/video_feed" class="w-full h-full object-contain">
+                <!-- Overlays -->
+                <div id="overlay-positioning" class="hidden absolute inset-0 bg-blue-900 bg-opacity-70 flex flex-col justify-center items-center text-white">
+                    <i class="fas fa-crosshairs text-6xl mb-4 animate-spin"></i>
+                    <h2 class="text-2xl font-bold tracking-widest">FIJANDO COORDENADAS...</h2>
+                    <p id="timer-3s" class="text-4xl mt-2 font-mono">3.0s</p>
+                </div>
+                <div id="overlay-auditing" class="hidden absolute inset-0 bg-[#E32322] bg-opacity-20 border-4 border-[#E32322] flex flex-col justify-center items-center">
+                    <h2 class="text-3xl font-bold text-white shadow-black drop-shadow-md animate-pulse">AUDITANDO PRODUCTO E IA...</h2>
+                    <p id="timer-5s" class="text-5xl mt-2 font-mono text-white drop-shadow-md">5.0s</p>
+                </div>
+                <div id="overlay-returning" class="hidden absolute inset-0 bg-green-900 bg-opacity-80 flex flex-col justify-center items-center text-white">
+                    <i class="fas fa-home text-6xl mb-4"></i>
+                    <h2 class="text-3xl font-bold tracking-widest">RETORNANDO A ESTACIÓN DE REPOSO</h2>
+                    <p class="text-lg mt-2">Ciclo de auditoría finalizado. Generando reporte...</p>
+                </div>
+            </div>
+            
+            <div class="bg-white p-3 rounded-lg shadow border-t-4 border-blue-500 flex justify-between">
+                <p class="font-bold text-gray-600" id="nav-text">Esperando ruta...</p>
+                <p class="font-mono font-bold text-blue-600" id="dist-text">0.00m</p>
+            </div>
+        </div>
+
+        <!-- Contenedor Derecho -->
+        <div class="w-4/12 flex flex-col gap-4 min-h-0">
+            <div class="card p-4">
+                <p class="text-xs text-gray-500 font-bold mb-1">CÓDIGO DE BARRAS LPN</p>
+                <p class="text-lg font-mono font-bold" id="lpn-text">--</p>
+                <div class="h-px bg-gray-200 my-2"></div>
+                <p class="text-xs text-gray-500 font-bold mb-1">IA VISUAL (Keras)</p>
+                <p class="text-lg font-bold nestle-text-blue" id="ia-text">--</p>
+            </div>
+
+            <div class="card flex-grow flex flex-col overflow-hidden min-h-0">
+                <div class="bg-gray-100 p-3 border-b border-gray-200">
+                    <p class="text-xs font-bold text-gray-700 tracking-widest"><i class="fas fa-list mr-1"></i> LOG EN VIVO</p>
+                </div>
+                <div id="audit-log" class="p-4 overflow-y-auto flex-grow space-y-2 text-xs min-h-0"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VISTA 3: PANTALLA DE RESULTADOS FINALES -->
+    <div id="view-results" class="view flex-col items-center justify-center flex-grow bg-white p-8 overflow-y-auto">
+        <h1 class="text-3xl font-bold nestle-text-blue mb-2">REPORTE FINAL DE AUDITORÍA</h1>
+        <p class="text-gray-500 mb-8" id="report-date">Generado el: --</p>
+
+        <div class="w-full max-w-5xl bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm mb-6">
+            <div class="grid grid-cols-3 gap-6 mb-6 text-center">
+                <div class="bg-white p-4 rounded shadow">
+                    <p class="text-gray-500 text-sm font-bold">TOTAL REVISADOS</p>
+                    <p class="text-3xl font-bold text-blue-600" id="res-total">0</p>
+                </div>
+                <div class="bg-white p-4 rounded shadow border-b-4 border-green-500">
+                    <p class="text-gray-500 text-sm font-bold">MATCH OK (BBDD)</p>
+                    <p class="text-3xl font-bold text-green-600" id="res-ok">0</p>
+                </div>
+                <div class="bg-white p-4 rounded shadow border-b-4 border-red-500">
+                    <p class="text-gray-500 text-sm font-bold">ERRORES ASRS</p>
+                    <p class="text-3xl font-bold text-red-600" id="res-error">0</p>
+                </div>
+            </div>
+
+            <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Detalle Logístico (Integración ERP)</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-200">
+                        <tr>
+                            <th class="px-4 py-2">Ubicación</th>
+                            <th class="px-4 py-2">LPN</th>
+                            <th class="px-4 py-2">Producto (IA)</th>
+                            <th class="px-4 py-2">Lote / Caducidad</th>
+                            <th class="px-4 py-2">Estado Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="report-table-body">
+                        <!-- Llenado dinámico -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <button onclick="showView('view-menu')" class="px-8 py-3 bg-[#00529B] text-white font-bold rounded shadow-lg hover:bg-blue-800">
+            <i class="fas fa-home mr-2"></i> VOLVER AL MENÚ PRINCIPAL
+        </button>
+    </div>
+
+    <!-- VISTA 4: HISTORIAL Y CALENDARIO -->
+    <div id="view-history" class="view flex-col items-center flex-grow bg-white p-8 overflow-y-auto">
+        <h1 class="text-3xl font-bold nestle-text-blue mb-8"><i class="fas fa-calendar-alt mr-2"></i> HISTORIAL DE AUDITORÍAS</h1>
+        
+        <div id="history-list" class="w-full max-w-4xl grid gap-4">
+            <!-- Las auditorías reales irán apareciendo aquí automáticamente -->
+        </div>
+
+        <button onclick="showView('view-menu')" class="mt-8 px-8 py-3 bg-gray-600 text-white font-bold rounded shadow-lg hover:bg-gray-700">
+            <i class="fas fa-arrow-left mr-2"></i> REGRESAR
+        </button>
+    </div>
+
+    <!-- Modal de Historial -->
+    <div id="modal-historial" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex-col items-center justify-center">
+        <div class="bg-white p-8 rounded-lg shadow-2xl w-11/12 max-w-5xl text-center flex flex-col max-h-[90vh]">
+            <h2 class="text-2xl font-bold mb-4">Detalle de Auditoría <span id="modal-h-title" class="text-blue-600"></span></h2>
+            <div class="flex-grow overflow-y-auto mb-6">
+                <table class="w-full text-sm text-left border">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-200">
+                        <tr>
+                            <th class="px-4 py-2">Ubicación</th>
+                            <th class="px-4 py-2">LPN</th>
+                            <th class="px-4 py-2">Producto (IA)</th>
+                            <th class="px-4 py-2">Caducidad</th>
+                            <th class="px-4 py-2">Acción Requerida</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modal-h-content">
+                        <!-- Se llena dinamicamente con filas de tabla -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="flex justify-center mt-auto">
+                <button onclick="cerrarModalHistorial()" class="bg-gray-500 text-white px-8 py-3 rounded font-bold shadow hover:bg-gray-600">
+                    Cerrar Detalle
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function changeCamera() {
+            const selector = document.getElementById('camera-selector');
+            const src = selector.value;
+            selector.disabled = true;
+            fetch('/api/set_camera', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ src: src })
+            }).then(res => res.json()).then(data => {
+                console.log("Cámara cambiada a:", data.src);
+                selector.disabled = false;
+            }).catch(err => {
+                console.error(err);
+                selector.disabled = false;
+            });
+        }
+
+        // MOCK DATABASE PARA ERP / SAP (Basado en la detección de IA)
+        const erpDatabase = {
+            "CAJA TACO": { lote: "L-TAC-01", caducidad: "15/02/2024", desc: "Caja - Galletas Taco" }, // CADUCADO PARA LA DEMO
+            "CAJA CEREAL": { lote: "L-CER-02", caducidad: "01/12/2026", desc: "Caja - Cereal Nestlé" },
+            "CAJA COCOA": { lote: "L-COC-03", caducidad: "20/08/2026", desc: "Caja - Hot Cocoa" },
+            "UNIDAD TACO": { lote: "U-TAC-99", caducidad: "15/10/2026", desc: "Suelto - Galletas Taco" },
+            "UNIDAD MAGGI": { lote: "U-MAG-88", caducidad: "30/01/2028", desc: "Suelto - Sazón Maggi" },
+            "UNIDAD CHAMPIÑONES": { lote: "U-CHA-77", caducidad: "14/05/2027", desc: "Suelto - Crema Champiñones" },
+            "UNIDAD VAQUITA": { lote: "U-VAQ-66", caducidad: "05/11/2026", desc: "Suelto - Leche Vaquita" },
+            "DEFAULT": { lote: "L-DESC", caducidad: "Desconocida", desc: "Producto No Registrado" }
+        };
+
+        // Estado del Sistema
+        let currentMode = ""; let targetRack = ""; let systemState = "IDLE";
+        let positionTimer = 0; let auditTimer = 0;
+        let auditMemory = { lpn: [], ia: [] };
+        
+        // Variables para Ruta Nocturna
+        let racksNocturnos = ["Rack A1", "Rack A2", "Rack A3"];
+        let racksCompletados = [];
+        let currentReport = [];
+
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+        }
+
+        function showAisleSelection() {
+            document.getElementById('main-menu-options').classList.add('hidden');
+            document.getElementById('aisle-menu').classList.remove('hidden');
+            document.getElementById('aisle-menu').classList.add('flex');
+        }
+
+        function hideAisleSelection() {
+            document.getElementById('aisle-menu').classList.add('hidden');
+            document.getElementById('aisle-menu').classList.remove('flex');
+            document.getElementById('main-menu-options').classList.remove('hidden');
+        }
+
+        function selectMode(mode, target = "TODOS") {
+            currentMode = mode;
+            targetRack = target;
+            currentReport = []; 
+            racksCompletados = []; // Resetear ruta nocturna
+            
+            document.getElementById('audit-log').innerHTML = '';
+            
+            if(mode === "Nocturno") {
+                systemState = "SEEKING";
+                logMsg(`INICIANDO MISIÓN: Inventario Nocturno (Ruta: A1, A2, A3)`, 'blue');
+                document.getElementById('btn-finalizar-ruta').classList.add('hidden');
+                targetRack = racksNocturnos[0];
+            } else if(mode === "Picking") {
+                systemState = "AUDITING_PICKING";
+                logMsg(`MODO PICKING MANUAL ACTIVADO. Pase los productos por la cámara.`, 'red');
+                document.getElementById('btn-finalizar-ruta').classList.remove('hidden');
+                document.getElementById('nav-text').innerText = "ESCANEO LIBRE";
+            } else {
+                systemState = "SEEKING";
+                logMsg(`INICIANDO MISIÓN: Auditoría Específica -> Objetivo: ${target}`, 'blue');
+                document.getElementById('btn-finalizar-ruta').classList.add('hidden');
+            }
+
+            showView('view-scanner');
+            hideAisleSelection();
+        }
+
+        let sessionHistoryDB = [];
+
+        function abrirModalHistorial(id) {
+            let session = sessionHistoryDB[id];
+            if(!session) return;
+            document.getElementById('modal-historial').classList.remove('hidden');
+            document.getElementById('modal-historial').classList.add('flex');
+            document.getElementById('modal-h-title').innerText = session.titulo;
+            document.getElementById('modal-h-content').innerHTML = session.html;
+        }
+
+        function cerrarModalHistorial() {
+            document.getElementById('modal-historial').classList.add('hidden');
+            document.getElementById('modal-historial').classList.remove('flex');
+        }
+
+        function simularEnvioMontacargas(btn) {
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Notificando...`;
+            btn.disabled = true;
+            btn.className = "bg-gray-400 text-white px-3 py-1 text-xs rounded font-bold shadow cursor-not-allowed";
+            setTimeout(() => {
+                btn.innerHTML = `<i class="fas fa-check mr-2"></i> Resuelto (Montacargas)`;
+                btn.className = "bg-green-600 text-white px-3 py-1 text-xs rounded font-bold shadow cursor-not-allowed";
+            }, 1500);
+        }
+
+        function solicitarRevision(btn) {
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Solicitando...`;
+            btn.disabled = true;
+            btn.className = "bg-gray-400 text-white px-3 py-1 text-xs rounded font-bold shadow cursor-not-allowed";
+            setTimeout(() => {
+                btn.innerHTML = `<i class="fas fa-check mr-2"></i> Revisión Solicitada`;
+                btn.className = "bg-blue-600 text-white px-3 py-1 text-xs rounded font-bold shadow cursor-not-allowed";
+            }, 1000);
+        }
+
+        function logMsg(msg, color) {
+            const log = document.getElementById('audit-log');
+            log.innerHTML = `<p class="text-${color}-600 font-bold">> ${msg}</p>` + log.innerHTML;
+        }
+
+        function calcularCaducidad(fechaStr) {
+            if (fechaStr === "Desconocida") return { expirado: false, dias: 'N/A' };
+            let partes = fechaStr.split('/');
+            if(partes.length !== 3) return { expirado: false, dias: 'N/A' };
+            let caducidadDate = new Date(partes[2], partes[1] - 1, partes[0]);
+            let hoy = new Date();
+            let diffTime = caducidadDate - hoy;
+            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return {
+                expirado: diffDays < 0,
+                dias: diffDays
+            };
+        }
+
+        function addReportItem(rack, lpn, ia, type) {
+            const erpInfo = erpDatabase[ia] || erpDatabase["DEFAULT"];
+            
+            let cadInfo = calcularCaducidad(erpInfo.caducidad);
+            if(cadInfo.expirado) {
+                // Siempre marcar como caducado si la fecha expiró, sin importar si hizo match o no
+                type = 'expired';
+            }
+
+            let estadoAccion = "";
+            let rowColor = "";
+            
+            if (type === 'ok') {
+                estadoAccion = "<span class='bg-green-100 text-green-800 px-2 py-1 rounded font-bold text-xs'>Correcto</span>";
+            } else if (type === 'error') {
+                estadoAccion = `<button onclick="simularEnvioMontacargas(this)" class='bg-red-600 text-white px-3 py-1 rounded font-bold text-xs shadow hover:bg-red-800'>Pedir Montacargas</button>`;
+                rowColor = "bg-red-50";
+            } else if (type === 'warn') {
+                estadoAccion = `<button onclick="solicitarRevision(this)" class='bg-yellow-500 text-white px-3 py-1 rounded font-bold text-xs shadow hover:bg-yellow-700'>Llamar Supervisor</button>`;
+                rowColor = "bg-yellow-50";
+            } else if (type === 'expired') {
+                estadoAccion = `<span class='bg-red-100 text-red-800 font-bold px-2 py-1 text-xs'>¡CADUCADO!</span> <button onclick="simularEnvioMontacargas(this)" class='bg-red-600 text-white px-2 py-1 rounded font-bold text-xs shadow hover:bg-red-800 ml-1'>Retirar Lote</button>`;
+                rowColor = "bg-orange-50";
+            }
+
+            let expText = cadInfo.dias === 'N/A' ? "Desconocido" : (cadInfo.expirado ? `Hace ${Math.abs(cadInfo.dias)} días` : `Faltan ${cadInfo.dias} días`);
+
+            // Evitar que diga "Ninguno" si la cámara se movió justo en el último milisegundo
+            if(rack === "Ninguno") rack = targetRack;
+
+            let rowHtml = `<tr class="border-b ${rowColor}">
+                <td class="px-4 py-3 font-bold">${rack}</td>
+                <td class="px-4 py-3 font-mono">${lpn}</td>
+                <td class="px-4 py-3">${ia}</td>
+                <td class="px-4 py-3 text-xs text-gray-500 font-bold ${cadInfo.expirado ? 'text-red-600' : ''}">Lote: ${erpInfo.lote}<br>Exp: ${erpInfo.caducidad} (${expText})</td>
+                <td class="px-4 py-3">${estadoAccion}</td>
+            </tr>`;
+
+            currentReport.push({
+                html: rowHtml,
+                type: type
+            });
+        }
+
+        function finishAuditCycle() {
+            systemState = "IDLE";
+            document.getElementById('overlay-returning').classList.remove('hidden');
+            
+            setTimeout(() => {
+                document.getElementById('overlay-returning').classList.add('hidden');
+                
+                document.getElementById('report-date').innerText = "Generado el: " + new Date().toLocaleString();
+                
+                let oks = currentReport.filter(r => r.type === 'ok').length;
+                let errs = currentReport.filter(r => r.type === 'error' || r.type === 'expired').length;
+                let warns = currentReport.filter(r => r.type === 'warn').length;
+                
+                document.getElementById('res-total').innerText = currentReport.length;
+                document.getElementById('res-ok').innerText = oks;
+                document.getElementById('res-error').innerText = errs;
+                
+                const tbody = document.getElementById('report-table-body');
+                let combinedHtml = currentReport.length > 0 ? currentReport.map(r => r.html).join('') : "<tr><td colspan='5' class='text-center py-4'>No se auditaron items.</td></tr>";
+                tbody.innerHTML = combinedHtml;
+                
+                // GUARDAR EN HISTORIAL DINAMICAMENTE
+                let fechaHora = new Date().toLocaleTimeString();
+                let titulo = currentMode === "Nocturno" ? "Inventario Nocturno Completo" : (currentMode === "Picking" ? "Sesión Zona Picking" : `Auditoría Específica: ${targetRack}`);
+                
+                let alertTags = "";
+                if(errs > 0) alertTags += `<div class="bg-red-100 text-red-800 px-3 py-1 rounded font-bold">${errs} Errores/Caducados</div>`;
+                if(warns > 0) alertTags += `<div class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded font-bold">${warns} Revisiones</div>`;
+                if(oks > 0 || currentReport.length === 0) alertTags = `<div class="bg-green-100 text-green-800 px-3 py-1 rounded font-bold">${oks} OK</div>` + alertTags;
+
+                // Guardar en la DB JS
+                let newId = sessionHistoryDB.length;
+                sessionHistoryDB.push({
+                    titulo: titulo,
+                    html: combinedHtml
+                });
+
+                let newHistoryItem = `
+                <div onclick="abrirModalHistorial(${newId})" class="card p-6 flex justify-between items-center cursor-pointer hover:bg-blue-50 border-l-4 border-blue-500">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">${titulo}</h3>
+                        <p class="text-sm text-gray-500">Auditoría finalizada a las ${fechaHora}</p>
+                    </div>
+                    <div class="flex gap-4 text-center text-sm">
+                        ${alertTags}
+                    </div>
+                </div>`;
+                
+                document.getElementById('history-list').insertAdjacentHTML('afterbegin', newHistoryItem);
+
+                showView('view-results');
+            }, 3000); 
+        }
+
+        let pickingCooldown = false;
+
+        // Loop principal conectado al Backend Flask
+        setInterval(() => {
+            if(systemState === "IDLE") return;
+
+            fetch('/api/status')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('dist-text').innerText = data.distancia !== "Buscando..." ? data.distancia : "0.00m";
+                    document.getElementById('lpn-text').innerText = data.lpn;
+                    document.getElementById('ia-text').innerText = data.ia_result;
+                    
+                    let rackDetectado = data.current_rack;
+                    let navText = document.getElementById('nav-text');
+
+                    // MODALIDAD PICKING LIBRE (Sin AprilTags, captura todo lo que ve)
+                    if (systemState === "AUDITING_PICKING") {
+                        if (!pickingCooldown && data.lpn !== "NO DETECTADO" && data.ia_result !== "Esperando..." && !data.ia_result.includes("FONDO VACIO")) {
+                            pickingCooldown = true;
+                            // Lógica de Validación Estricta para Picking
+                            const lpnToClass = {
+                                "N101": "CAJA COCOA",
+                                "N102": "CAJA CEREAL",
+                                "N05": "CAJA TACO"
+                            };
+                            let isMatch = true;
+                            if (lpnToClass[data.lpn]) {
+                                if (lpnToClass[data.lpn] !== data.ia_result) isMatch = false;
+                            } else if (data.lpn.toUpperCase().includes("ERROR")) {
+                                isMatch = false;
+                            }
+
+                            if (isMatch) {
+                                logMsg(`[PICKING] MATCH OK: ${data.lpn} = ${data.ia_result}`, 'green');
+                                addReportItem("Mesa Picking", data.lpn, data.ia_result, 'ok');
+                            } else {
+                                logMsg(`[PICKING] ALERTA: ${data.lpn} no pertenece a ${data.ia_result}`, 'red');
+                                addReportItem("Mesa Picking", data.lpn, data.ia_result, 'error');
+                            }
+                            // Cooldown para no saturar lecturas
+                            setTimeout(() => { pickingCooldown = false; }, 3000);
+                        }
+                    }
+
+                    // MODALIDAD NORMAL (Con AprilTags)
+                    else if (systemState === "SEEKING") {
+                        document.getElementById('overlay-positioning').classList.add('hidden');
+                        document.getElementById('overlay-auditing').classList.add('hidden');
+                        navText.innerText = `Buscando ${targetRack}...`;
+                        navText.className = "font-bold text-gray-500";
+
+                        if (rackDetectado !== "Ninguno" && (targetRack === "TODOS" || rackDetectado === targetRack)) {
+                            systemState = "POSITIONING";
+                            positionTimer = 3.0;
+                            logMsg(`Rack detectado: ${rackDetectado}. Iniciando fijación...`, 'gray');
+                        }
+                    }
+                    
+                    else if (systemState === "POSITIONING") {
+                        navText.innerText = `Alineando con ${rackDetectado}`;
+                        navText.className = "font-bold nestle-text-blue";
+                        document.getElementById('overlay-positioning').classList.remove('hidden');
+                        
+                        if (rackDetectado === "Ninguno") { systemState = "SEEKING"; return; } // Perdió vista
+
+                        positionTimer -= 0.1;
+                        document.getElementById('timer-3s').innerText = Math.abs(positionTimer).toFixed(1) + "s";
+
+                        if (positionTimer <= 0) {
+                            document.getElementById('overlay-positioning').classList.add('hidden');
+                            logMsg(`Posicionado correctamente en ${rackDetectado}.`, 'green');
+                            systemState = "AUDITING";
+                            auditTimer = 5.0;
+                            auditMemory = { lpn: [], ia: [] };
+                        }
+                    }
+
+                    else if (systemState === "AUDITING") {
+                        navText.innerText = `Auditando ${rackDetectado}`;
+                        navText.className = "font-bold nestle-text-red";
+                        document.getElementById('overlay-auditing').classList.remove('hidden');
+
+                        if (data.lpn !== "NO DETECTADO") auditMemory.lpn.push(data.lpn);
+                        if (data.ia_result !== "Esperando..." && data.ia_result !== "") auditMemory.ia.push(data.ia_result);
+
+                        auditTimer -= 0.1;
+                        document.getElementById('timer-5s').innerText = Math.abs(auditTimer).toFixed(1) + "s";
+
+                        if (auditTimer <= 0) {
+                            document.getElementById('overlay-auditing').classList.add('hidden');
+                            
+                            let foundLPN = auditMemory.lpn.length > 0 ? auditMemory.lpn[auditMemory.lpn.length-1] : "N/A";
+                            let foundIA = auditMemory.ia.length > 0 ? auditMemory.ia[auditMemory.ia.length-1] : "N/A";
+
+                            // 1. Diccionario Estricto de Relaciones (Lo que imprimiste en la carpeta pitch)
+                            const lpnToClass = {
+                                "N101": "CAJA COCOA",
+                                "N102": "CAJA CEREAL",
+                                "N05": "CAJA TACO"
+                            };
+
+                            // Lógica de Validación ASRS Estricta
+                            let isMatch = true;
+                            
+                            // Si el LPN es uno de los impresos, verificamos que coincida con la vista de la IA
+                            if (lpnToClass[foundLPN]) {
+                                if (lpnToClass[foundLPN] !== foundIA) {
+                                    isMatch = false; // ¡Mismtach Detectado!
+                                }
+                            } else if (foundLPN.toUpperCase().includes("ERROR")) {
+                                isMatch = false;
+                            }
+
+                            if (isMatch) {
+                                logMsg(`[${rackDetectado}] MATCH OK: LPN ${foundLPN} verificado.`, 'green');
+                                addReportItem(rackDetectado, foundLPN, foundIA, 'ok');
+                            } else {
+                                logMsg(`[${rackDetectado}] ALERTA ASRS: Código ${foundLPN} no pertenece a ${foundIA}`, 'red');
+                                addReportItem(rackDetectado, foundLPN, foundIA, 'error');
+                            }
+
+                            systemState = "DONE_RACK";
+                        }
+                    }
+
+                    else if (systemState === "DONE_RACK") {
+                        navText.innerText = "Revisión finalizada.";
+                        navText.className = "font-bold text-gray-500";
+                        
+                        if (currentMode === "Nocturno") {
+                            // Marcar rack completado y avanzar
+                            if (!racksCompletados.includes(targetRack)) {
+                                racksCompletados.push(targetRack);
+                            }
+                            
+                            if (racksCompletados.length >= racksNocturnos.length) {
+                                // Terminó la ruta
+                                logMsg("RUTA NOCTURNA COMPLETADA.", "blue");
+                                finishAuditCycle();
+                            } else {
+                                // Esperar a perder de vista el rack actual para buscar el siguiente
+                                if (rackDetectado === "Ninguno") {
+                                    targetRack = racksNocturnos[racksCompletados.length];
+                                    logMsg(`Avanzando a siguiente objetivo: ${targetRack}`, "gray");
+                                    systemState = "SEEKING";
+                                } else {
+                                    navText.innerText = "Muévase al siguiente pasillo...";
+                                }
+                            }
+                        } else {
+                            // Modo Específico termina de inmediato y va al Home
+                            finishAuditCycle();
+                        }
+                    }
+
+                })
+                .catch(err => {});
+        }, 100);
+
+        // Generar Datos de Prueba (Borradores) para la Pestaña de Historial
+        function generarMockHistory() {
+            let rowCaducado = `<tr class="border-b bg-orange-50">
+                <td class="px-4 py-3 font-bold">Rack A2</td>
+                <td class="px-4 py-3 font-mono">N05</td>
+                <td class="px-4 py-3">CAJA TACO</td>
+                <td class="px-4 py-3 text-xs text-gray-500 font-bold text-red-600">Lote: L-TAC-01<br>Exp: 15/02/2024 (Hace 900 días)</td>
+                <td class="px-4 py-3"><span class='bg-red-100 text-red-800 font-bold px-2 py-1 text-xs'>¡CADUCADO!</span> <button onclick="simularEnvioMontacargas(this)" class='bg-red-600 text-white px-2 py-1 rounded font-bold text-xs shadow hover:bg-red-800 ml-1'>Retirar Lote</button></td>
+            </tr>`;
+            
+            let rowAlerta = `<tr class="border-b bg-red-50">
+                <td class="px-4 py-3 font-bold">Mesa Picking</td>
+                <td class="px-4 py-3 font-mono">N101</td>
+                <td class="px-4 py-3">CAJA CEREAL</td>
+                <td class="px-4 py-3 text-xs text-gray-500 font-bold">Lote: L-CER-02<br>Exp: 01/12/2026 (Faltan 790 días)</td>
+                <td class="px-4 py-3"><button onclick="simularEnvioMontacargas(this)" class='bg-red-600 text-white px-3 py-1 rounded font-bold text-xs shadow hover:bg-red-800'>Pedir Montacargas</button></td>
+            </tr>`;
+
+            let rowFalta = `<tr class="border-b bg-yellow-50">
+                <td class="px-4 py-3 font-bold">Rack A1</td>
+                <td class="px-4 py-3 font-mono">FALTA CÓDIGO</td>
+                <td class="px-4 py-3">CAJA COCOA</td>
+                <td class="px-4 py-3 text-xs text-gray-500 font-bold">Lote: L-COC-03<br>Exp: 20/08/2026 (Faltan 700 días)</td>
+                <td class="px-4 py-3"><button onclick="solicitarRevision(this)" class='bg-yellow-500 text-white px-3 py-1 rounded font-bold text-xs shadow hover:bg-yellow-700'>Llamar Supervisor</button></td>
+            </tr>`;
+
+            // Agregar un registro falso con errores variados
+            let id1 = sessionHistoryDB.length;
+            sessionHistoryDB.push({ titulo: "HOY - Inventario Nocturno", html: rowCaducado + rowFalta });
+            let h1 = `
+                <div onclick="abrirModalHistorial(${id1})" class="card p-6 flex justify-between items-center cursor-pointer hover:bg-blue-50 border-l-4 border-blue-500">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">HOY - Inventario Nocturno</h3>
+                        <p class="text-sm text-gray-500">Auditoría finalizada a las 05:30 AM</p>
+                    </div>
+                    <div class="flex gap-4 text-center text-sm">
+                        <div class="bg-red-100 text-red-800 px-3 py-1 rounded font-bold">1 Errores/Caducados</div>
+                        <div class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded font-bold">1 Revisiones</div>
+                    </div>
+                </div>`;
+
+            // Agregar registro falso de picking
+            let id2 = sessionHistoryDB.length;
+            sessionHistoryDB.push({ titulo: "AYER - Auditoría de Picking", html: rowAlerta });
+            let h2 = `
+                <div onclick="abrirModalHistorial(${id2})" class="card p-6 flex justify-between items-center cursor-pointer hover:bg-blue-50 border-l-4 border-blue-500 opacity-75">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">AYER - Auditoría de Picking</h3>
+                        <p class="text-sm text-gray-500">Auditoría finalizada a las 14:15 PM</p>
+                    </div>
+                    <div class="flex gap-4 text-center text-sm">
+                        <div class="bg-red-100 text-red-800 px-3 py-1 rounded font-bold">1 Errores/Caducados</div>
+                    </div>
+                </div>`;
+
+            document.getElementById('history-list').innerHTML = h1 + h2;
+        }
+
+        // Ejecutar al iniciar la pagina
+        generarMockHistory();
+    </script>
+</body>
+</html>
