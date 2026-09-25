@@ -58,12 +58,12 @@
             <div onclick="selectMode('Nocturno')" class="cursor-pointer bg-gray-50 border-2 border-gray-200 p-4 rounded-xl w-64 text-center hover:border-[#00529B] hover:shadow-lg transition-all">
                 <i class="fas fa-route text-4xl nestle-text-blue mb-4"></i>
                 <h2 class="text-lg font-bold mb-2">Inventario Nocturno</h2>
-                <p class="text-xs text-gray-600">Revisión autónoma (Rack 1, 2 y 3).</p>
+                <p class="text-xs text-gray-600">Revisión autónoma (Pallet 1, 2 y 3).</p>
             </div>
             <div onclick="showAisleSelection()" class="cursor-pointer bg-gray-50 border-2 border-gray-200 p-4 rounded-xl w-64 text-center hover:border-[#00529B] hover:shadow-lg transition-all">
                 <i class="fas fa-boxes text-4xl nestle-text-blue mb-4"></i>
                 <h2 class="text-lg font-bold mb-2">Auditoría Específica</h2>
-                <p class="text-xs text-gray-600">Revisar un Rack puntual.</p>
+                <p class="text-xs text-gray-600">Revisar un Pallet puntual.</p>
             </div>
             <div onclick="selectMode('Picking', 'Mesa de Picking')" class="cursor-pointer bg-gray-50 border-2 border-gray-200 p-4 rounded-xl w-64 text-center hover:border-[#E32322] hover:shadow-lg transition-all">
                 <i class="fas fa-hands text-4xl nestle-text-red mb-4"></i>
@@ -78,11 +78,11 @@
         </div>
 
         <div id="aisle-menu" class="hidden flex-col items-center">
-            <h2 class="text-xl font-bold mb-6">Seleccione el Rack a auditar:</h2>
+            <h2 class="text-xl font-bold mb-6">Seleccione el Pallet a auditar:</h2>
             <div class="flex gap-4">
-                <button onclick="selectMode('Especifico', 'Rack A1')" class="px-6 py-3 bg-[#00529B] text-white font-bold rounded shadow hover:bg-blue-800">Rack A1</button>
-                <button onclick="selectMode('Especifico', 'Rack A2')" class="px-6 py-3 bg-[#00529B] text-white font-bold rounded shadow hover:bg-blue-800">Rack A2</button>
-                <button onclick="selectMode('Especifico', 'Rack A3')" class="px-6 py-3 bg-[#00529B] text-white font-bold rounded shadow hover:bg-blue-800">Rack A3</button>
+                <button onclick="selectMode('Especifico', 'Pallet 1')" class="px-6 py-3 bg-[#00529B] text-white font-bold rounded shadow hover:bg-blue-800">Pallet 1</button>
+                <button onclick="selectMode('Especifico', 'Pallet 2')" class="px-6 py-3 bg-[#00529B] text-white font-bold rounded shadow hover:bg-blue-800">Pallet 2</button>
+                <button onclick="selectMode('Especifico', 'Pallet 3')" class="px-6 py-3 bg-[#00529B] text-white font-bold rounded shadow hover:bg-blue-800">Pallet 3</button>
             </div>
             <button onclick="hideAisleSelection()" class="mt-6 text-gray-500 hover:text-gray-800 font-bold underline">Cancelar</button>
         </div>
@@ -254,9 +254,9 @@
 
         // MOCK DATABASE PARA ERP / SAP (Basado en la detección de IA)
         const erpDatabase = {
-            "CAJA TACO": { lote: "L-TAC-01", caducidad: "15/02/2024", desc: "Caja - Galletas Taco" }, // CADUCADO PARA LA DEMO
-            "CAJA CEREAL": { lote: "L-CER-02", caducidad: "01/12/2026", desc: "Caja - Cereal Nestlé" },
-            "CAJA COCOA": { lote: "L-COC-03", caducidad: "20/08/2026", desc: "Caja - Hot Cocoa" },
+            "CAJA TACO": { lote: "L-TAC-01", caducidad: "15/02/2027", desc: "Caja - Galletas Taco" }, 
+            "CAJA CEREAL": { lote: "L-CER-02", caducidad: "01/12/2024", desc: "Caja - Cereal Nestlé" }, // CADUCADO PARA LA DEMO
+            "CAJA COCOA": { lote: "L-COC-03", caducidad: "20/08/2027", desc: "Caja - Hot Cocoa" },
             "UNIDAD TACO": { lote: "U-TAC-99", caducidad: "15/10/2026", desc: "Suelto - Galletas Taco" },
             "UNIDAD MAGGI": { lote: "U-MAG-88", caducidad: "30/01/2028", desc: "Suelto - Sazón Maggi" },
             "UNIDAD CHAMPIÑONES": { lote: "U-CHA-77", caducidad: "14/05/2027", desc: "Suelto - Crema Champiñones" },
@@ -265,13 +265,13 @@
         };
 
         // Estado del Sistema
-        let currentMode = ""; let targetRack = ""; let systemState = "IDLE";
+        let currentMode = ""; let targetPallet = ""; let systemState = "IDLE";
         let positionTimer = 0; let auditTimer = 0;
         let auditMemory = { lpn: [], ia: [] };
         
         // Variables para Ruta Nocturna
-        let racksNocturnos = ["Rack A1", "Rack A2", "Rack A3"];
-        let racksCompletados = [];
+        let palletsNocturnos = ["Pallet 1", "Pallet 2", "Pallet 3"];
+        let palletsCompletados = [];
         let currentReport = [];
 
         function showView(viewId) {
@@ -293,9 +293,9 @@
 
         function selectMode(mode, target = "TODOS") {
             currentMode = mode;
-            targetRack = target;
+            targetPallet = target;
             currentReport = []; 
-            racksCompletados = []; // Resetear ruta nocturna
+            palletsCompletados = []; // Resetear ruta nocturna
             
             document.getElementById('audit-log').innerHTML = '';
             
@@ -303,7 +303,7 @@
                 systemState = "SEEKING";
                 logMsg(`INICIANDO MISIÓN: Inventario Nocturno (Ruta: A1, A2, A3)`, 'blue');
                 document.getElementById('btn-finalizar-ruta').classList.add('hidden');
-                targetRack = racksNocturnos[0];
+                targetPallet = palletsNocturnos[0];
             } else if(mode === "Picking") {
                 systemState = "AUDITING_PICKING";
                 logMsg(`MODO PICKING MANUAL ACTIVADO. Pase los productos por la cámara.`, 'red');
@@ -402,7 +402,7 @@
             let expText = cadInfo.dias === 'N/A' ? "Desconocido" : (cadInfo.expirado ? `Hace ${Math.abs(cadInfo.dias)} días` : `Faltan ${cadInfo.dias} días`);
 
             // Evitar que diga "Ninguno" si la cámara se movió justo en el último milisegundo
-            if(rack === "Ninguno") rack = targetRack;
+            if(rack === "Ninguno") pallet = targetPallet;
 
             let rowHtml = `<tr class="border-b ${rowColor}">
                 <td class="px-4 py-3 font-bold">${rack}</td>
@@ -441,7 +441,7 @@
                 
                 // GUARDAR EN HISTORIAL DINAMICAMENTE
                 let fechaHora = new Date().toLocaleTimeString();
-                let titulo = currentMode === "Nocturno" ? "Inventario Nocturno Completo" : (currentMode === "Picking" ? "Sesión Zona Picking" : `Auditoría Específica: ${targetRack}`);
+                let titulo = currentMode === "Nocturno" ? "Inventario Nocturno Completo" : (currentMode === "Picking" ? "Sesión Zona Picking" : `Auditoría Específica: ${targetPallet}`);
                 
                 let alertTags = "";
                 if(errs > 0) alertTags += `<div class="bg-red-100 text-red-800 px-3 py-1 rounded font-bold">${errs} Errores/Caducados</div>`;
@@ -485,7 +485,7 @@
                     document.getElementById('lpn-text').innerText = data.lpn;
                     document.getElementById('ia-text').innerText = data.ia_result;
                     
-                    let rackDetectado = data.current_rack;
+                    let palletDetectado = data.current_rack;
                     let navText = document.getElementById('nav-text');
 
                     // MODALIDAD PICKING LIBRE (Sin AprilTags, captura todo lo que ve)
@@ -521,29 +521,29 @@
                     else if (systemState === "SEEKING") {
                         document.getElementById('overlay-positioning').classList.add('hidden');
                         document.getElementById('overlay-auditing').classList.add('hidden');
-                        navText.innerText = `Buscando ${targetRack}...`;
+                        navText.innerText = `Buscando ${targetPallet}...`;
                         navText.className = "font-bold text-gray-500";
 
-                        if (rackDetectado !== "Ninguno" && (targetRack === "TODOS" || rackDetectado === targetRack)) {
+                        if (palletDetectado !== "Ninguno" && (targetPallet === "TODOS" || palletDetectado === targetPallet)) {
                             systemState = "POSITIONING";
                             positionTimer = 3.0;
-                            logMsg(`Rack detectado: ${rackDetectado}. Iniciando fijación...`, 'gray');
+                            logMsg(`Pallet detectado: ${palletDetectado}. Iniciando fijación...`, 'gray');
                         }
                     }
                     
                     else if (systemState === "POSITIONING") {
-                        navText.innerText = `Alineando con ${rackDetectado}`;
+                        navText.innerText = `Alineando con ${palletDetectado}`;
                         navText.className = "font-bold nestle-text-blue";
                         document.getElementById('overlay-positioning').classList.remove('hidden');
                         
-                        if (rackDetectado === "Ninguno") { systemState = "SEEKING"; return; } // Perdió vista
+                        if (palletDetectado === "Ninguno") { systemState = "SEEKING"; return; } // Perdió vista
 
                         positionTimer -= 0.1;
                         document.getElementById('timer-3s').innerText = Math.abs(positionTimer).toFixed(1) + "s";
 
                         if (positionTimer <= 0) {
                             document.getElementById('overlay-positioning').classList.add('hidden');
-                            logMsg(`Posicionado correctamente en ${rackDetectado}.`, 'green');
+                            logMsg(`Posicionado correctamente en ${palletDetectado}.`, 'green');
                             systemState = "AUDITING";
                             auditTimer = 5.0;
                             auditMemory = { lpn: [], ia: [] };
@@ -551,7 +551,7 @@
                     }
 
                     else if (systemState === "AUDITING") {
-                        navText.innerText = `Auditando ${rackDetectado}`;
+                        navText.innerText = `Auditando ${palletDetectado}`;
                         navText.className = "font-bold nestle-text-red";
                         document.getElementById('overlay-auditing').classList.remove('hidden');
 
@@ -587,36 +587,36 @@
                             }
 
                             if (isMatch) {
-                                logMsg(`[${rackDetectado}] MATCH OK: LPN ${foundLPN} verificado.`, 'green');
-                                addReportItem(rackDetectado, foundLPN, foundIA, 'ok');
+                                logMsg(`[${palletDetectado}] MATCH OK: LPN ${foundLPN} verificado.`, 'green');
+                                addReportItem(palletDetectado, foundLPN, foundIA, 'ok');
                             } else {
-                                logMsg(`[${rackDetectado}] ALERTA ASRS: Código ${foundLPN} no pertenece a ${foundIA}`, 'red');
-                                addReportItem(rackDetectado, foundLPN, foundIA, 'error');
+                                logMsg(`[${palletDetectado}] ALERTA ASRS: Código ${foundLPN} no pertenece a ${foundIA}`, 'red');
+                                addReportItem(palletDetectado, foundLPN, foundIA, 'error');
                             }
 
-                            systemState = "DONE_RACK";
+                            systemState = "DONE_PALLET";
                         }
                     }
 
-                    else if (systemState === "DONE_RACK") {
+                    else if (systemState === "DONE_PALLET") {
                         navText.innerText = "Revisión finalizada.";
                         navText.className = "font-bold text-gray-500";
                         
                         if (currentMode === "Nocturno") {
                             // Marcar rack completado y avanzar
-                            if (!racksCompletados.includes(targetRack)) {
-                                racksCompletados.push(targetRack);
+                            if (!palletsCompletados.includes(targetPallet)) {
+                                palletsCompletados.push(targetPallet);
                             }
                             
-                            if (racksCompletados.length >= racksNocturnos.length) {
+                            if (palletsCompletados.length >= palletsNocturnos.length) {
                                 // Terminó la ruta
                                 logMsg("RUTA NOCTURNA COMPLETADA.", "blue");
                                 finishAuditCycle();
                             } else {
                                 // Esperar a perder de vista el rack actual para buscar el siguiente
-                                if (rackDetectado === "Ninguno") {
-                                    targetRack = racksNocturnos[racksCompletados.length];
-                                    logMsg(`Avanzando a siguiente objetivo: ${targetRack}`, "gray");
+                                if (palletDetectado === "Ninguno") {
+                                    targetPallet = palletsNocturnos[palletsCompletados.length];
+                                    logMsg(`Avanzando a siguiente objetivo: ${targetPallet}`, "gray");
                                     systemState = "SEEKING";
                                 } else {
                                     navText.innerText = "Muévase al siguiente pasillo...";
@@ -635,7 +635,7 @@
         // Generar Datos de Prueba (Borradores) para la Pestaña de Historial
         function generarMockHistory() {
             let rowCaducado = `<tr class="border-b bg-orange-50">
-                <td class="px-4 py-3 font-bold">Rack A2</td>
+                <td class="px-4 py-3 font-bold">Pallet 2</td>
                 <td class="px-4 py-3 font-mono">N05</td>
                 <td class="px-4 py-3">CAJA TACO</td>
                 <td class="px-4 py-3 text-xs text-gray-500 font-bold text-red-600">Lote: L-TAC-01<br>Exp: 15/02/2024 (Hace 900 días)</td>
@@ -651,7 +651,7 @@
             </tr>`;
 
             let rowFalta = `<tr class="border-b bg-yellow-50">
-                <td class="px-4 py-3 font-bold">Rack A1</td>
+                <td class="px-4 py-3 font-bold">Pallet 1</td>
                 <td class="px-4 py-3 font-mono">FALTA CÓDIGO</td>
                 <td class="px-4 py-3">CAJA COCOA</td>
                 <td class="px-4 py-3 text-xs text-gray-500 font-bold">Lote: L-COC-03<br>Exp: 20/08/2026 (Faltan 700 días)</td>

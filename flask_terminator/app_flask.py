@@ -40,7 +40,7 @@ aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_APRILTAG_36h11)
 detector_params = cv2.aruco.DetectorParameters()
 detector = cv2.aruco.ArucoDetector(aruco_dict, detector_params)
 MARKER_SIZE = 0.078
-MAPA_RACKS = {0: "Rack A1", 1: "Rack A2", 2: "Rack A3", 3: "Mesa Picking"}
+MAPA_RACKS = {0: "Pallet 1", 1: "Pallet 2", 2: "Pallet 3", 3: "Mesa Picking"}
 
 # Estado Global de la App para que la interfaz Web lo lea
 global_state = {
