@@ -1,0 +1,149 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=25mm,
+    right=25mm,
+    top=25mm,
+    bottom=25mm
+}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{parskip} % Espaciado entre parrafos sin sangria
+
+% Configuración de colores
+\definecolor{primary}{RGB}{41, 128, 185}
+\definecolor{darkgray}{RGB}{60, 60, 60}
+
+% Configuración de enlaces
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primary,
+    filecolor=magenta,      
+    urlcolor=primary,
+}
+
+% Cajas para resaltados (Contexto, Pregunta, Resultado)
+\newmdenv[
+  leftline=true,
+  rightline=false,
+  topline=false,
+  bottomline=false,
+  linewidth=4pt,
+  linecolor=primary,
+  backgroundcolor=gray!10,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  innertopmargin=10pt,
+  innerbottommargin=10pt
+]{highlightbox}
+
+\begin{document}
+
+\begin{center}
+    \vspace*{1cm}
+    \Huge \textbf{Taller de Innovación Nestlé} \\
+    \vspace{0.5cm}
+    \LARGE \textbf{Propuesta de Valor AeroStock OS} \\
+    \vspace{1cm}
+    \rule{\linewidth}{0.5mm}
+\end{center}
+
+\vspace{0.5cm}
+Este documento sintetiza la información operativa de Nestlé, las proyecciones tecnológicas y los entregables requeridos para la ronda final de pitch.
+
+\section{Análisis del Problema y Expectativas}
+
+\subsection*{El Problema Actual (Dolores / Pain Points)}
+\begin{itemize}[label=\textcolor{red}{\textbullet}]
+    \item \textbf{Inventario Manual e Inseguro:} El almacén cuenta con \textbf{24,000+ posiciones} a \textbf{12 metros de altura}. Al tener \textbf{$\sim$0\% de automatización}, la auditoría exige elevar operarios en canastas de montacargas, generando un alto riesgo de accidentes.
+    \item \textbf{Trazabilidad Lenta y Desconectada:} El WMS se actualiza de forma manual post-ingreso. Esta falta de sincronización en tiempo real con SAP genera altas tasas de error y desajustes físicos.
+    \item \textbf{Cuellos de Botella Constantes:} La dependencia intensiva de montacargas manuales crea bloqueos al final de la línea. Esto fuerza paros no planificados que reducen el \textbf{OEE (Overall Equipment Effectiveness)} de la planta 24/7.
+\end{itemize}
+
+\subsection*{El Desafío (Expectativas de la Solución)}
+\begin{itemize}[label=\textcolor{green}{\textbullet}]
+    \item \textbf{Capacidad:} Mover y auditar un flujo de \textbf{215 pallets por turno} en un tramo de \textbf{20 metros}.
+    \item \textbf{Continuidad:} Operación \textbf{24/7} con \textbf{cero interrupciones} no planificadas.
+    \item \textbf{Integración:} Sincronización instantánea de WMS y SAP.
+    \item \textbf{KPIs Objetivo:} Cero incidentes de seguridad, minimización de tiempos de ciclo y maximización de la exactitud del inventario.
+\end{itemize}
+
+\section{Formato: Contexto + Pregunta + Resultado}
+
+\begin{highlightbox}
+\textbf{(Contexto con cuantificación):} \\
+Actualmente en el almacén, auditar manualmente racks de hasta 12 metros de altura expone a los operarios a riesgos fatales y consume extensas jornadas. Esto perpetúa un nivel de automatización del $\sim$0\% y retrasa el flujo crítico de 215 pallets por turno (dependientes de montacargas manuales). Estos paros impactan gravemente el OEE y la capacidad productiva de la planta.
+\end{highlightbox}
+
+\begin{highlightbox}
+\textbf{(Pregunta Reto):} \\
+¿Cómo podríamos automatizar la búsqueda y validación de productos en posiciones de gran altura, de tal manera que reduzcamos drásticamente el tiempo de conteo, eliminemos al 100\% el riesgo humano y sincronicemos la trazabilidad en tiempo real con SAP y WMS?
+\end{highlightbox}
+
+\begin{highlightbox}
+\textbf{(Resultado Esperado):} \\
+Reducir los ciclos de inventario a rutinas diarias automatizadas que alcancen un 99.9\% de exactitud en los datos, erradicando por completo la necesidad de realizar trabajo humano en alturas peligrosas.
+\end{highlightbox}
+
+\section{Diseño de Propuesta de Valor}
+
+\begin{itemize}
+    \item \textbf{NUESTRO(S):} AeroStock OS (Sistema ASRS visual integrado con Drones).
+    \item \textbf{AYUDA(N):} A los jefes de bodega y operarios logísticos de Nestlé.
+    \item \textbf{QUE QUIEREN:} Mantener un flujo ininterrumpido de 215 pallets por turno (24/7) y tener control total sobre sus inventarios.
+    \item \textbf{PARA (Analgésico):} Eliminar la accidentabilidad por caídas de altura (12m) y reducir los frustrantes cuellos de botella.
+    \item \textbf{Y (Creador de Valor):} Aumentar la exactitud del inventario por encima del 99\% mediante auditorías visuales (Lectura LPN y detección de caducidades) sincronizadas instantáneamente.
+    \item \textbf{A DIFERENCIA DE:} Los métodos tradicionales manuales, donde el personal debe trepar en canastas sin validación inmediata de datos.
+\end{itemize}
+
+\section{Cuantificación y Estimación de Mejora}
+
+Proyecciones de impacto del prototipo AeroStock frente al proceso manual actual:
+
+\begin{enumerate}
+    \item \textbf{Eficiencia (Reducción de Tiempo):} Un operador tarda 2 a 3 minutos por cada pallet a gran altura. Un dron ASRS vuela y escanea en 2 a 4 segundos por pallet. Esto representa una \textbf{reducción del 85\% al 90\%} en tiempos de captura.
+    \item \textbf{Seguridad (Cero Riesgo de Altura):} El 100\% de las posiciones superiores a 2 metros exigen maquinaria para elevar personas. El impacto es del \textbf{100\% de eliminación} de horas-hombre en trabajo riesgoso.
+    \item \textbf{Calidad (Trazabilidad y Precisión):} La tasa de error humano ronda el 3\% y 5\%. La visión artificial garantiza una exactitud del \textbf{99.9\%} con alertas directas.
+\end{enumerate}
+
+\section{Estructura de Pitches (Estrategia: Demo en Vivo Integrada)}
+
+\subsection*{Pitch Preliminar (1 minuto)}
+\textit{``Hola, somos el equipo AeroStock. Actualmente en Nestlé operamos con más de 24,000 posiciones a 12 metros de altura y el control de inventario es 100\% manual. Esto obliga a personas a subir en canastas de montacargas, poniendo en riesgo sus vidas y causando cuellos de botella que frenan la planta 24/7.}
+
+\textit{Para solucionarlo, creamos \textbf{AeroStock OS}, un sistema de visión artificial que usa drones autónomos para auditar la bodega. Escanea códigos LPN y detecta caducidades en tiempo real, validándolo con el WMS. Eliminamos el 100\% del riesgo en alturas y logramos un 99.9\% de exactitud. ¡Tenemos un prototipo físico funcional aquí mismo que les mostraremos en la ronda final! Gracias.''}
+
+\subsection*{Pitch Final (3 minutos - Incluyendo Demo en Vivo)}
+
+\textbf{Diapo 1: Contexto y Problema (30 seg)} \\
+``¿Sabían que la falta de automatización logística afecta directamente el OEE de nuestra planta? Hoy controlamos 24,000 posiciones manualmente. Subir operarios a 12 metros de altura para auditar es un riesgo de vida latente y genera cuellos de botella que interrumpen nuestra producción 24/7. Nuestro registro es tardío y no habla con SAP en tiempo real.''
+
+\textbf{Diapo 2: La Solución Teórica (30 seg)} \\
+``La pregunta fue: ¿Cómo auditar a 12 metros en segundos sin arriesgar a nadie? Les presentamos \textbf{AeroStock OS}. Un cerebro de Inteligencia Artificial que recibe video de drones. Mientras el dron vuela orientándose con AprilTags, lee LPNs y clasifica el producto. Si hay un error, alerta al WMS. Cero intervención humana.''
+
+\textbf{TRANSICIÓN A DEMO EN VIVO (Min. 1:00 a 2:15 - 75 seg)} \\
+\textit{[Nota: Quitan las diapositivas y muestran la pantalla web de AeroStock (Flask). Alguien tiene el celular (Dron Principal) apuntando a las 3 cajas físicas en la mesa].} \\
+``Pero no vinimos a contárselo, vinimos a demostrárselo en vivo. Tenemos aquí 3 cajas físicas simulando los Racks A1, A2 y A3. Esta cámara web de nuestro celular simula el dron en vuelo. Observen la pantalla: pasamos el `dron' por el primer Rack... [hacen el escaneo de la primera caja]. ¡Boom! Detecta el código LPN al instante. Ahora pasamos a este otro Rack... [escanean la caja con caducidad]. ¡Fíjense en la alerta roja de CADUCADO! El sistema bloquea el producto en tiempo real. Y si vemos el `Historial', todo queda registrado con ubicación y fecha exacta para auditoría.''
+
+\textbf{Diapo 3: Propuesta de Valor y Resultados (30 seg)} \\
+\textit{[Nota: Regresan rápido a las diapositivas]} \\
+``Como acaban de ver, transformamos un proceso peligroso en una auditoría continua:
+\begin{itemize}
+    \item \textbf{Seguridad:} CERO riesgo en altura.
+    \item \textbf{Eficiencia:} Reducimos el tiempo en más de un 85\%.
+    \item \textbf{Trazabilidad:} Exactitud del 99.9\%.
+\end{itemize}
+Aseguramos que el flujo de 215 pallets no sufra bloqueos, protegiendo el OEE.''
+
+\textbf{Diapo 4: Cierre (15 seg)} \\
+``Con AeroStock OS, el almacén deja de ser un cuello de botella y se convierte en una ventaja competitiva ágil, rentable y segura. Muchas gracias.''
+
+\end{document}

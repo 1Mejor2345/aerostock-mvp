@@ -70,6 +70,12 @@ class VideoCamera(object):
         
         if src == "droidcam":
             self.video = cv2.VideoCapture("http://192.168.100.115:4747/video")
+        elif src == "droidcam_wifi":
+            self.video = cv2.VideoCapture("http://172.20.128.244:4747/video")
+        elif src == "droidcam_device":
+            self.video = cv2.VideoCapture("http://10.198.156.27:4747/video")
+        
+        if src.startswith("droidcam"):
             # Fallback automático si DroidCam falla
             if not self.video.isOpened():
                 self.video = cv2.VideoCapture(0)
